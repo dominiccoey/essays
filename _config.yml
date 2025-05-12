@@ -1,0 +1,12 @@
+# ---  _config.yml  ---
+title: "Essay"
+description: "A minimalist Tufte-style page with KaTeX math"
+remote_theme: ab/jekyll-theme-tufte      # pulls the Tufte theme at build time
+plugins: [jekyll-remote-theme]           # lets GitHub use the remote theme
+
+markdown: kramdown                       # GitHub’s default Markdown engine
+kramdown:
+  input: GFM                             # GitHub-Flavored Markdown
+  math_engine: katex                     # change to 'mathjax' if you prefer
+
+highlighter: rouge                       # syntax highlight for code blocks
