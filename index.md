@@ -1,7 +1,6 @@
 ---
 layout: essay          
 title: "..."
-permalink: /baumol/     # if you want that exact URL
 ---
 
 # Baumol
