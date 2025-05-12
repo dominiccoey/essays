@@ -4,6 +4,9 @@ description: "A minimalist Tufte-style page with KaTeX math"
 remote_theme: ab/ab/jekyll-theme-tufte@c3c83e3      # pulls the Tufte theme at build time
 plugins: [jekyll-remote-theme]           # lets GitHub use the remote theme
 
+url: "https://dominiccoey.github.io"
+baseurl: "/essays"
+
 markdown: kramdown                       # GitHub’s default Markdown engine
 kramdown:
   input: GFM                             # GitHub-Flavored Markdown
