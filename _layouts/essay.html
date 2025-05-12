@@ -1,7 +1,14 @@
-<!-- _layouts/essay.html -->
 ---
 layout: default
 ---
 
-{% include katex.html %}          {# ← add this just beneath <head> #}
-{{ content }}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% include head.html %}
+    {% include katex.html %}
+  </head>
+  <body>
+    {{ content }}
+  </body>
+</html>
