@@ -1,7 +1,7 @@
 # ---  _config.yml  ---
 title: "Essay"
 description: "A minimalist Tufte-style page with KaTeX math"
-remote_theme: ab/jekyll-theme-tufte      # pulls the Tufte theme at build time
+remote_theme: ab/ab/jekyll-theme-tufte@c3c83e3      # pulls the Tufte theme at build time
 plugins: [jekyll-remote-theme]           # lets GitHub use the remote theme
 
 markdown: kramdown                       # GitHub’s default Markdown engine
