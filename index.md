@@ -1,3 +1,9 @@
+---
+layout: essay          
+title: "..."
+permalink: /baumol/     # if you want that exact URL
+---
+
 # Baumol
 This page is rendered with the **Tufte-CSS** look and supports inline \\(x^2\\) or
 display math:
