@@ -1,6 +1,6 @@
 ---
 layout: post           # layout comes from the theme
-title: "Why $e^{i\pi}+1=0$ Matters"
+title: "Baumol"
 katex: true            # tells the layout to include KaTeX assets
 ---
 
