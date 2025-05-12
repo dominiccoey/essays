@@ -1,6 +1,7 @@
 ---
-layout: essay          
-title: "..."
+layout: essay           # ← your custom layout in _layouts/essay.html
+title: "Baumol’s Cost Disease, AI & Economic Growth"
+permalink: /baumol/     # publishes to /essays/baumol/
 ---
 
 # Baumol
