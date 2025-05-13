@@ -1,7 +1,7 @@
 # --- _config.yml ---
 theme: minima
-minima:
-  skin: solarized    Light variant of solarized color scheme.
+# minima:
+  # skin: solarized    Light variant of solarized color scheme.
 
 url: "https://dominiccoey.github.io"
 baseurl: "/essays"         # your repo’s name
