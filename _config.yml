@@ -1,16 +1,20 @@
 # ---  _config.yml  ---
-title: ""
-description: "A minimalist Tufte-style page with KaTeX math"
+# Use GitHub’s “Minimal” theme via the built-in remote-theme mechanism
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+  - jekyll-remote-theme          # required for `remote_theme`
 
+# Base URLs – MUST be set so the theme loads its CSS/JS under /essays/
 url: "https://dominiccoey.github.io"
-baseurl: "/essays"
+baseurl: "/essays"               # <- leading slash, no trailing '/'
 
-markdown: kramdown                       # GitHub’s default Markdown engine
+title: ""                        # empty => no big header banner
+description: "Essay site with KaTeX math"
+
+# Markdown engine
+markdown: kramdown
 kramdown:
-  input: GFM                             # GitHub-Flavored Markdown
-  math_engine: katex                     # change to 'mathjax' if you prefer
+  input: GFM                     # GitHub-flavoured markdown
+  math_engine: katex             # leave here even though KaTeX runs client-side
 
-highlighter: rouge                       # syntax highlight for code blocks
+highlighter: rouge               # code-block highlighting
