@@ -8,14 +8,22 @@ permalink: /baumol/
 
 This page uses **Minima** and renders math via **MathJax**.
 
-Inline math \(x^2 + y^2 = z^2\) and display math:
+Here’s inline math: \(x^2 + y^2 = z^2\)
+
+And here’s display math with either of these:
 
 $$
 e^{i\pi} + 1 = 0
 $$
 
-You can also use normal Markdown footnotes:
+or
+
+\[
+e^{i\pi} + 1 = 0
+\]
+
+You can also do normal footnotes:
 
 Here is some text.[^1]
 
-[^1]: This is a footnote rendered in small print.
+[^1]: A footnote in small print.
