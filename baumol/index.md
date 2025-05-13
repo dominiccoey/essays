@@ -8,7 +8,7 @@ permalink: /baumol/
 
 This page uses **Minima** and renders math via **MathJax**.
 
-Here’s inline math: `$x^2 + y^2 = z^2$`
+Here’s inline math: $x^2 + y^2 = z^2$
 
 And here’s display math (two `$` on a line by themselves):
 
