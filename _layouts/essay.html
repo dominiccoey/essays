@@ -1,12 +1,8 @@
 ---
-layout: default
+layout: default        # inherit the theme’s default HTML skeleton
 ---
-<!DOCTYPE html>
-<html>
-  <head>
-    {% include katex.html %}
-  </head>
-  <body>
-    {{ content }}
-  </body>
-</html>
+
+{% include head.html %}    {# theme’s normal <head> #}
+{% include katex.html %}   {# KaTeX CSS & JS (added above) #}
+
+{{ content }}               {# your Markdown -> HTML #}
