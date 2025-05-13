@@ -1,17 +1,17 @@
 # --- _config.yml ---
 remote_theme: clayh53/tufte-jekyll
 plugins:
-  - jekyll-remote-theme
+  - jekyll-remote-theme    # so remote_theme: is honored
 
 url: "https://dominiccoey.github.io"
-baseurl: "/essays"
+baseurl: "/essays"         # your repo’s name
 
-title: ""                                # suppress the banner
-description: "Tufte-Jekyll with MathJax"
+title: ""                  # no big banner
+description: "Tufte-Jekyll + MathJax demo"
 
 markdown: kramdown
 kramdown:
   input: GFM
-  math_engine: mathjax                   # kramdown will leave your \(…\) & $$…$$ intact
+  math_engine: mathjax     # leave your \(…\) & $$…$$ in place
 
 highlighter: rouge
