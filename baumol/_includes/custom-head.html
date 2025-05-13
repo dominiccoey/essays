@@ -1,13 +1,19 @@
 <!-- _includes/custom-head.html -->
 
-<!-- MathJax configuration -->
+<!-- MathJax config: teach it all three delimiters -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
       inlineMath: [['\\(', '\\)']],
-      displayMath: [['$$','$$']]
+      displayMath: [
+        ['$$','$$'],
+        ['\\[','\\]']
+      ],
+      processEscapes: true
     },
-    TeX: { equationNumbers: { autoNumber: 'AMS' } }
+    TeX: {
+      equationNumbers: { autoNumber: 'AMS' }
+    }
   });
 </script>
 <!-- MathJax loader -->
