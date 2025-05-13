@@ -1,5 +1,7 @@
 # --- _config.yml ---
-theme: minima
+remote_theme: jekyll/minima@master
+plugins:
+  - jekyll-remote-theme
 
 minima:
   skin: solarized-light    Light variant of solarized color scheme.
