@@ -1,8 +1,8 @@
 ---
-layout: default        # inherit the theme’s default HTML skeleton
+layout: default          # inherit the theme’s HTML skeleton
 ---
 
-{% include head.html %}    {# theme’s normal <head> #}
-{% include katex.html %}   {# KaTeX CSS & JS (added above) #}
+{% include head.html %}   <!-- the Tufte theme’s <head> (CSS, meta, etc.) -->
+{% include katex.html %}  <!-- our KaTeX scripts/styles -->
 
-{{ content }}               {# your Markdown -> HTML #}
+{{ content }}             <!-- your page’s Markdown → HTML -->
