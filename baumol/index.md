@@ -1,12 +1,11 @@
 ---
-layout: essay
 title: "Baumol’s Cost Disease, AI & Economic Growth"
-permalink: /baumol/
+permalink: /baumol/       # publishes to https://…/essays/baumol/
 ---
 
 # Baumol’s Cost Disease, AI & Economic Growth
 
-This page uses **Tufte-Jekyll** and renders math via **KaTeX**.
+This page uses **Tufte-Jekyll** and renders math via **MathJax**.
 
 Inline math \(x^2 + y^2 = z^2\) and display math:
 
