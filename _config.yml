@@ -1,17 +1,17 @@
 # --- _config.yml ---
-remote_theme: clayh53/tufte-jekyll      # pull the Tufte-CSS Jekyll theme
+remote_theme: clayh53/tufte-jekyll
 plugins:
-  - jekyll-remote-theme                # REQUIRED for `remote_theme`
+  - jekyll-remote-theme
 
-url: "https://dominiccoey.github.io"    # your GitHub Pages root
-baseurl: "/essays"                      # repo name preceded by a slash
+url: "https://dominiccoey.github.io"
+baseurl: "/essays"
 
-title: ""                               # empty => no big banner
-description: "Essays with Tufte-CSS + KaTeX"
+title: ""                                # hides the big banner
+description: "Tufte-Jekyll + KaTeX demo"
 
 markdown: kramdown
 kramdown:
   input: GFM
-  math_engine: katex                    # kramdown parses \( \) & $$ $$
+  math_engine: katex
 
 highlighter: rouge
