@@ -4,14 +4,14 @@ plugins:
   - jekyll-remote-theme
 
 url: "https://dominiccoey.github.io"
-baseurl: "/essays"
+baseurl: "/essays"            # must match your repo name
 
-title: ""                                # hides the big banner
+title: ""                     # omit the banner
 description: "Tufte-Jekyll + KaTeX demo"
 
 markdown: kramdown
 kramdown:
   input: GFM
-  math_engine: katex
+  math_engine: katex          # kramdown only parses the delimiters
 
 highlighter: rouge
