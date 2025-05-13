@@ -1,16 +1,17 @@
 ---
-layout: essay           # ← your custom layout in _layouts/essay.html
+layout: essay            # use the layout above
 title: "Baumol’s Cost Disease, AI & Economic Growth"
-permalink: /baumol/     # publishes to /essays/baumol/
+permalink: /baumol/      # page URL => /essays/baumol/
 ---
-# Baumol
-This page is rendered with the **Tufte-CSS** look and supports inline \(x^2\) or
-display math:
+
+# Baumol’s Cost Disease, AI & Economic Growth
+
+Inline math \(x^2 + y^2 = z^2\) and display math:
 
 $$
 e^{i\pi} + 1 = 0
 $$
 
-Here is a *sidenote*[^sn]:
+Here is a *sidenote*[^sn].
 
-[^sn]: On wide screens the note appears in the left margin.
+[^sn]: On wide screens this sidenote appears in the left margin.
