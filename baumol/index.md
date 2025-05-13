@@ -4,8 +4,6 @@ title: "Baumol’s Cost Disease, AI & Economic Growth"
 permalink: /baumol/
 ---
 
-# Baumol’s Cost Disease, AI & Economic Growth
-
 This page uses **Minima** and renders math via **MathJax**.
 
 Here’s inline math: $x^2 + y^2 = z^2$
