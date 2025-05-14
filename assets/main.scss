@@ -6,14 +6,9 @@
 
 // 2️⃣ override the little “↩” so it renders from a cleaner symbol font
 a.reversefootnote {
-  color: transparent !important;
-  /* if you want to remove the hover underline, too: */
-  text-decoration: none !important;
-}
-
-a.reversefootnote::before {
-  content: "33" !important;
-  color: #333;
+  // color: transparent !important;
+  // /* if you want to remove the hover underline, too: */
+  // text-decoration: none !important;
   font-family:
     "Segoe UI Symbol",   /* Windows/Mac symbol font */
     "Noto Sans Symbols",  /* cross-platform alternative */
@@ -22,8 +17,21 @@ a.reversefootnote::before {
     "Helvetica Neue",
     Arial,
     sans-serif;
-  font-weight: normal;
-  font-size: 0.9em;
-  margin-right: 0.3em;
-  vertical-align: text-top;
 }
+
+// a.reversefootnote::before {
+//   content: "33" !important;
+//   color: #333;
+//   font-family:
+//     "Segoe UI Symbol",   /* Windows/Mac symbol font */
+//     "Noto Sans Symbols",  /* cross-platform alternative */
+//     -apple-system,
+//     BlinkMacSystemFont,
+//     "Helvetica Neue",
+//     Arial,
+//     sans-serif;
+//   font-weight: normal;
+//   font-size: 0.9em;
+//   margin-right: 0.3em;
+//   vertical-align: text-top;
+// }
