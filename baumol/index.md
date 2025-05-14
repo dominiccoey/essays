@@ -25,14 +25,16 @@ Here's the simplest possible illustration of cost disease.
 * Productivity growth is $g_H = 0$ in houses and $g_C > 0$ in code. Output is given by $H = L_H$ and $C = Ae^{g_C t} L_C$, at time $t$.
 * Houses and code are perfect complements, so utility is $U(H, C) = \min(H,C)$.
 
-At time $t=0$, we allocate half of all labor to each sector, and produce $L/2$ units of each good, for utility equal to $L/2$. Now imagine time progresses, and we have an incredibly productive coding sector. What will the economy look like in the long-run? The housing share of labor will go to one, the coding share of labor will go to zero, and output will converge to $L$ units of housing and $L$ units of code. Output has doubled relative to the starting point of $L/2$ units of each, but growth must asymptote to zero, because the economy is approaching its maximum output. The figure below shows the transition, where the pre and post productivity growth production possibility frontiers are in blue.
+At time $t=0$, we allocate half of all labor to each sector, and produce $L/2$ units of each good, for utility equal to $L/2$. Now imagine time progresses, and we have an incredibly productive coding sector. What will the economy look like in the long-run? The housing share of labor will go to one, the coding share of labor will go to zero, and output will converge to $L$ units of housing and $L$ units of code. Output has doubled relative to the starting point of $L/2$ units of each, but growth must asymptote to zero, because the economy is approaching its maximum output. The figure below shows the transition, where the pre and post productivity growth production possibility frontiers are in blue, and the consumption path of the economy as time progresses in red.
 
-![complements](./assets/fig1.png "example image")
+![leontief](./assets/leontief.png "leontief")
 
 But wait—the utility function essentially imposes that the ratio of $H$ to $C$ is constant (and indeed the assumption of constant output proportions is behind the original stagnation argument of [Baumol (1967)](https://www.jstor.org/stable/1812111). Having exactly zero substitutability between goods is an extreme case. What happens if we relax this? 
 
 ### We can have zero growth even without constant output proportions
 Suppose houses and code aren't perfect complements. Depending on what preferences look like, we could still end up in a world where labor is all sucked up by the housing sector (the figure below), or where it all goes to the coding sector, or somewhere in between. That we end up in the first case can't be taken for granted, but to steelman the cost disease argument, let's consider it.[^1] Will aggregate growth to decline to zero, as all labor goes to the sector with zero productivity growth? 
+
+![ces](./assets/ces.png "ces")
 
 [^1]: This will occur with CES preferences if the elasticity of substituion is under 1, per [Ngai and Pissarides (2007)](https://www.aeaweb.org/articles?id=10.1257/aer.97.1.429). This reference provides a much more complete treatment of this topic, in a more general setting with both capital and labor. 
 
