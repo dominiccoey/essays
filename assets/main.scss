@@ -5,8 +5,8 @@
 @import "minima";
 
 // 2️⃣ override the little “↩” so it renders from a cleaner symbol font
-.reversefootnote::before {
-  content: "33";
+a.reversefootnote::before {
+  content: "33" !important;
   font-family:
     "Segoe UI Symbol",   /* Windows/Mac symbol font */
     "Noto Sans Symbols",  /* cross-platform alternative */
