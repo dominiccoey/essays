@@ -31,7 +31,7 @@ At time $t=0$, we allocate half of all labor to each sector, and produce $L/2$ u
 
 This utility function imposes that the ratio of $H$ to $C$ is constant (and indeed the assumption of constant output proportions is behind the original stagnation argument of [Baumol (1967)](https://www.jstor.org/stable/1812111)). Exactly zero substitutability between goods is an extreme case. What happens if we relax this? 
 
-### We can have zero growth even without constant output proportions
+### Zero growth even without constant output proportions
 Suppose houses and code aren't perfect complements. Depending on what preferences look like, we could still end up in a world where labor is all sucked up by the housing sector (the figure below), or where it all goes to the coding sector, or somewhere in between. That we end up in the first case can't be taken for granted, but to steelman the cost disease argument, let's consider it.[^1] Will aggregate growth to decline to zero, as all labor goes to the sector with zero productivity growth? 
 
 <img src="./assets/ces.png" alt="CES" width="500px">
