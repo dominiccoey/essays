@@ -4,6 +4,14 @@
 // 1️⃣ pull in all of Minima’s default styles
 @import "minima";
 
+.footnotes {
+  margin-top: 3rem;              /* space from body text */
+  padding-top: 2rem;             /* room above the rule */
+  border-top: 1px solid #e1e1e1; /* subtle horizontal divider */
+  font-size: 0.8rem;           /* slightly smaller footnote copy */
+  color: #6a737d;                /* muted grey text */
+}
+
 // 2️⃣ override the little “↩” so it renders from a cleaner symbol font
 a.reversefootnote {
   // color: transparent !important;
