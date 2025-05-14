@@ -5,6 +5,12 @@
 @import "minima";
 
 // 2️⃣ override the little “↩” so it renders from a cleaner symbol font
+a.reversefootnote {
+  color: transparent !important;
+  /* if you want to remove the hover underline, too: */
+  text-decoration: none !important;
+}
+
 a.reversefootnote::before {
   content: "33" !important;
   font-family:
