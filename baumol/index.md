@@ -34,7 +34,7 @@ But wait—the utility function essentially imposes that the ratio of $H$ to $C$
 ### We can have zero growth even without constant output proportions
 Suppose houses and code aren't perfect complements. Depending on what preferences look like, we could still end up in a world where labor is all sucked up by the housing sector (the figure below), or where it all goes to the coding sector, or somewhere in between. That we end up in the first case can't be taken for granted, but to steelman the cost disease argument, let's consider it.[^1] Will aggregate growth to decline to zero, as all labor goes to the sector with zero productivity growth? 
 
-[^1]: This will occur with CES preferences if the elasticity of substituion is under 1, per [Ngai and Pissarides (2007)](https://www.aeaweb.org/articles?id=10.1257/aer.97.1.429). This reference provides a much more complete treatment of this material, in a more general setting with both capital and labor. 
+[^1]: This will occur with CES preferences if the elasticity of substituion is under 1, per [Ngai and Pissarides (2007)](https://www.aeaweb.org/articles?id=10.1257/aer.97.1.429). This reference provides a much more complete treatment of this topic, in a more general setting with both capital and labor. 
 
 The answer is yes. Aggregate growth is $g = s_C g_C + s_H g_H$, where $s_C$ and $s_H$ are the expenditure shares of code and housing.[^2] Because $g_H = 0$ by assumption, this reduces to $s_C g_C$. Under perfect competition the share of labor in the coding sector equals the expenditure share of code. So the percent of expenditure going to code, $s_C$, converges to zero, and aggregate growth $g$ goes to zero too.
 
