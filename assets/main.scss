@@ -6,7 +6,7 @@
 
 // 2️⃣ override the little “↩” so it renders from a cleaner symbol font
 .return-to a::before {
-  content: "↩";
+  content: "33";
   font-family:
     "Segoe UI Symbol",   /* Windows/Mac symbol font */
     "Noto Sans Symbols",  /* cross-platform alternative */
