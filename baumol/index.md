@@ -47,7 +47,9 @@ Note what this does _not_ imply. We're not saying that people aren't any better 
 
 It is dangerous to transfer our ordinary intuitions about what a zero growth world looks like to this post-AI transition hypothetical. Zero growth in the sense of "more or less the current economy, but on the verge of recession" and in the sense of "incredible abundance in all products of intelligence, so labor is reallocated to other unproductive sectors" are very different things.
 
-[^3]: With non-homothetic preferences, the [classic welfare justifications](https://www.cambridge.org/core/books/abs/essays-in-the-theory-and-measurement-of-consumer-behaviour-in-honour-of-sir-richard-stone/economic-theory-of-index-numbers-a-survey/52A45638278E8E4F9B35E3BD120F48E5) for this definition of aggregate growth don't apply. We could also have welfare increasing without bound, even as growth asymptotes to zero.
+[^3]: A natural counter is "even if the instantaneous growth rate falls to zero, its time-integral still tracks welfare, so long-run living standards are accurately reflected in GDP.” However that's not true with non-homothetic preferences (from classic index-number results, e.g. [here](https://www.cambridge.org/core/books/abs/essays-in-the-theory-and-measurement-of-consumer-behaviour-in-honour-of-sir-richard-stone/economic-theory-of-index-numbers-a-survey/52A45638278E8E4F9B35E3BD120F48E5)). And that’s before the further gap between GDP and welfare induced by mismeasured quality or new goods.
+
+One might object that even though growth asymptotes to zero, at least if we integrate it over time, that would give us an accurate depiction of how welfare has changed. Well, not really—with non-homothetic preferences, the [classic welfare justifications]() for this definition of aggregate growth don't apply. We could have welfare increasing steadily, even as growth asymptotes to zero. And this is not even taking into account other reasons GDP and welfare may diverge, like unmeasured quality improvements from new goods. 
 
 ## Substitutability is not fixed. It's affected by innovation!
 
