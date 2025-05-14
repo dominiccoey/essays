@@ -27,6 +27,8 @@ Here's the simplest possible illustration of cost disease.
 
 At time $t=0$, we allocate half of all labor to each sector, and produce $L/2$ units of each good, for utility equal to $L/2$. Now imagine time progresses, and we have an incredibly productive coding sector. What will the economy look like in the long-run? The housing share of labor will go to one, the coding share of labor will go to zero, and output will converge to $L$ units of housing and $L$ units of code. Output has doubled relative to the starting point of $L/2$ units of each, but growth must asymptote to zero, because the economy is approaching its maximum output. The figure below shows the transition, where the pre and post productivity growth production possibility frontiers are in blue.
 
+![complements](./assets/fig1.png "example image")
+
 But wait—the utility function essentially imposes that the ratio of $H$ to $C$ is constant (and indeed the assumption of constant output proportions is behind the original stagnation argument of [Baumol (1967)](https://www.jstor.org/stable/1812111). Having exactly zero substitutability between goods is an extreme case. What happens if we relax this? 
 
 ### We can have zero growth even without constant output proportions
