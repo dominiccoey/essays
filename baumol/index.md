@@ -10,7 +10,7 @@ permalink: /baumol/
 * The key question is how much productivity in various sectors will be affected by AI. Whether aggregate growth stagnates because of cost disease is mostly a distraction by comparison.
 
 ## Beware arguments from cost disease
-Baumol's cost disease might seem to support tempering expectations for AI. The argument is roughly: "sure, we might have substantial productivity growth in some sectors. But for cost disease reasons we should expect labor to be increasingly reallocated to low productivity growth sectors, and so aggregate economic growth will be much more modest. And if aggregate growth is low, we shouldn't expect a meaningfully transformed economy."
+Baumol's cost disease might seem to support tempering expectations for AI. The argument is roughly: "Sure, we might have substantial productivity growth in some sectors. But for cost disease reasons we should expect labor to be increasingly reallocated to low productivity growth sectors, and so aggregate economic growth will be much more modest. And if aggregate growth is low, we shouldn't expect a meaningfully transformed economy."
 
 This argument has some appeal, but the conclusion ("we shouldn't expect a meaningfully transformed economy") doesn't follow. Even with cost disease, growth stagnates because the output of high-productivity sectors becomes so abundant that its price plummets, and its share of total output value falls too. So even if growth stagnates, this extraordinary abundance could make us much richer in every way that matters.
 
@@ -38,7 +38,7 @@ Suppose houses and code aren't perfect complements. Depending on what preference
 
 [^1]: This will occur with CES preferences if the elasticity of substitution is under 1, per [Ngai and Pissarides (2007)](https://www.aeaweb.org/articles?id=10.1257/aer.97.1.429). They give a much more complete treatment of this topic, in a more general setting with both capital and labor. 
 
-The answer is yes. Aggregate growth is $g = s_C g_C + s_H g_H$, where $s_C$ and $s_H$ are the expenditure shares of code and housing.[^2] Because $g_H = 0$ by assumption, this reduces to $s_C g_C$. Under perfect competition the share of labor in the coding sector equals the expenditure share of code. So the percent of expenditure going to code, $s_C$, converges to zero, and aggregate growth $g$ goes to zero too.
+The answer is yes. Aggregate growth is $g = s_C g_C + s_H g_H$, where $s_C$ and $s_H$ are the expenditure shares of code and housing.[^2] Because $g_H = 0$ by assumption, this reduces to $s_C g_C$. Under perfect competition the share of labor in the coding sector equals the expenditure share of code. So the expenditure share of code, $s_C$, converges to zero, and aggregate growth $g$ goes to zero too.
 
 [^2]: This is measuring real GDP using the Divisia index. If instead we evaluated output at fixed prices, aggregate growth need not converge to zero, because the aggregate value of code produced can increase without bound.
 
@@ -49,7 +49,7 @@ Note what this does _not_ imply. We're not saying that people aren't any better 
 
 It is dangerous to transfer our ordinary intuitions about what a zero growth world looks like to a post-AI hypothetical. Zero growth in the sense of "more or less the current economy, but on the verge of recession" and in the sense of "incredible abundance in all products of intelligence, so labor is reallocated to other unproductive sectors" are very different things.
 
-[^3]: A natural counter is "even if the instantaneous growth rate falls to zero, its time-integral still tracks welfare, so long-run living standards are accurately reflected in GDP.” That's certainly more reasonable, but it requires homothetic preferences (from classic index-number results, e.g. [here](https://www.cambridge.org/core/books/abs/essays-in-the-theory-and-measurement-of-consumer-behaviour-in-honour-of-sir-richard-stone/economic-theory-of-index-numbers-a-survey/52A45638278E8E4F9B35E3BD120F48E5)). And that’s before the further gap between GDP and welfare induced by mismeasured quality or new goods.
+[^3]: A natural counter is "even if the instantaneous growth rate falls to zero, its time-integral still tracks welfare, so long-run living standards are accurately reflected in GDP.” That's certainly more reasonable, but it requires homothetic preferences (from classic index-number results, e.g. [here](https://www.cambridge.org/core/books/abs/essays-in-the-theory-and-measurement-of-consumer-behaviour-in-honour-of-sir-richard-stone/economic-theory-of-index-numbers-a-survey/52A45638278E8E4F9B35E3BD120F48E5)). And that’s before the further gap between GDP and welfare induced by mismeasured quality or new goods, which may be exacerbated by rapid transformation in some sectors.
 
 ## Substitutability is not fixed. It's affected by innovation!
 
@@ -61,7 +61,7 @@ It's a stretch to think that code can literally substitute for houses. But more 
 
 <img src="./assets/elasticity.jpg" alt="Elasticity" width="300px">
 
-There's some irony that Baumol's canonical illustration of cost disease involved a string quartet as the unproductive sector [(Baumol, 1965)](https://www.jstor.org/stable/1816292). Listening to a string quartet perform live is something for which we have developed [pretty good substitutes](https://www.youtube.com/watch?v=otdayisyIiM) for over the past 150 years. As Baumol says in a later paper [(Baumol, 1967)](https://www.jstor.org/stable/1812111)
+There's some irony that Baumol's canonical illustration of cost disease involved a string quartet as the unproductive sector [(Baumol, 1965)](https://www.jstor.org/stable/1816292). Listening to a string quartet perform live is something for which we have developed [pretty good substitutes](https://www.youtube.com/watch?v=otdayisyIiM) over the past 150 years. As Baumol says in a later paper [(Baumol, 1967)](https://www.jstor.org/stable/1812111)
 
 > It is a matter of degree rather than an absolute dichotomy...Certainly the mass media have created what may be considered a new set of products that are close substitutes for live performance and by which productivity was increased spectacularly 
 
