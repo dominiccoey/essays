@@ -7,7 +7,7 @@ url: "https://dominiccoey.github.io"
 baseurl: "/essays"         # your repo’s name
 
 title: ""                  # no big banner
-description: "Tufte-Jekyll + MathJax, demo"
+description: ""
 
 markdown: kramdown
 kramdown:
