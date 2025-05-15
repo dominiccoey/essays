@@ -3,7 +3,7 @@ layout: page
 title: "Baumol’s Cost Disease, AI & Economic Growth"
 permalink: /baumol/
 ---
-
+#### May 14, 2025
 ## tl;dr 
 
 * Stagnating aggregate growth from Baumol cost disease is consistent with radical AI-driven transformation of broad sectors of the economy, and correspondingly large increases in standards of living.
