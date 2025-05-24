@@ -29,7 +29,7 @@ L(\phi, \theta; x) &= \mathbb E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{p_\the
 \end{align}
 $$
 
-So the marginal likelihood can be written as $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}( q_\phi(z|x) \parallel p_\theta(z|x) )$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
+So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}( q_\phi(z|x) \parallel p_\theta(z|x) )$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
 
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
@@ -37,11 +37,19 @@ So the marginal likelihood can be written as $\ln p_\theta(x) = L(\phi, \theta; 
 **ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, from maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where e.g. we want to generate new images similar to the training images.
 
 ### How does ELBO deliver these benefits?
-Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
+Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[^2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
 
-Here's where ELBO helps. If we are willing to specify some latent variables $Z$ such that $p_\theta(x,z)$ is easy to compute, and some reasonably flexible model $q_\phi(z \mid x)$ which is also easy to compute, then we can use the ELBO in place of the marginal likelihood as a surrogate objective. Maximizing the ELBO will approximately maximize the marginal likelihood.
+Here's where ELBO helps. If 
+1. we specify some latent variables $Z$ such that $p_\theta(x,z)$ is easy to compute, and
+2. we specify some reasonably flexible model $q_\phi(z \mid x)$ which is also easy to compute and to sample from
 
-extra flexiblity bough because the mean and variance functions may be complex neural networks...
+then we can use the ELBO in place of the marginal likelihood as a surrogate objective. Maximizing the ELBO will approximately maximize the marginal likelihood.
+
+The fact that the ELBO is will be easier to evaluate than the marginal likelihood is a consequence of 1 and 2. 
+
+### An example. 
+ 
+ extra flexiblity bough because the mean and variance functions may be complex neural networks...
 
 
 [^2]: Normalizing flows..
