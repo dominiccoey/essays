@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Some applications include statistics (the EM algorithm, variational Bayes), ML (diffusion models, variational autoencoders), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Some application areas include statistics (the EM algorithm, variational Bayes), ML (diffusion models, variational autoencoders), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
 
 This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
 
