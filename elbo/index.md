@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include statistics (the EM algorithm, variational Bayes), ML (diffusion models, variational autoencoders), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include ML (diffusion models, variational autoencoders), statistics (the EM algorithm, variational Bayes), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
 
 This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
 
@@ -45,7 +45,7 @@ Here's where ELBO helps. If
 
 then we can use the ELBO in place of the marginal likelihood as a surrogate objective. Maximizing the ELBO will approximately maximize the marginal likelihood.
 
-The fact that the ELBO is will be easier to evaluate than the marginal likelihood is a consequence of 1 and 2. 
+The fact that the ELBO is will be easier to evaluate than the marginal likelihood is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z | x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot | x)$, we can use Monte Carlo integration, sampling from that distribution (again, easy by assumption).
 
 ### An example. 
  
