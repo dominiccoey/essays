@@ -12,7 +12,7 @@ This note explains the ELBO and how it applies in the examples above, not assumi
 ## What is it?
 **Setup.** We have observed variables $X$ and latent variables $Z$. We have a parametric model $p_\theta(x,z)$, and $(X,Z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We also have a model for the conditional distribution $q_\phi(z \mid x)$, the role of which will become clear shortly. 
 
-**Definition.** The evidence lower bound is $L(\phi, \theta; x)$ is defined as
+**Definition.** The evidence lower bound is $L(\phi, \theta; x)$ is
 
 $$
 L(\phi, \theta; x) = \mathbb E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{p_\theta(x,  z)}{q_\phi(z|x)} \right].
@@ -36,19 +36,19 @@ So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}( q
 ## Why is it important?
 **ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, from maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where e.g. we want to generate new images similar to the training images.
 
-### How does ELBO deliver these benefits?
+### How does ELBO work?
 Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[^2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
 
 Here's where ELBO helps. If 
 1. we specify some latent variables $Z$ such that $p_\theta(x,z)$ is easy to compute, and
 2. we specify some reasonably flexible model $q_\phi(z \mid x)$ which is also easy to compute and to sample from
 
-then we can use the ELBO in place of the marginal likelihood as a surrogate objective. Maximizing the ELBO will approximately maximize the marginal likelihood.
-
-The fact that the ELBO is will be easier to evaluate than the marginal likelihood is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z | x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot | x)$, we can use Monte Carlo integration, sampling from that distribution (again, easy by assumption).
+then we can use the ELBO in place of the marginal likelihood as an easier to evaluate, surrogate objective. Unpacking this claim:
+- _Easier to evaluate_: This is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z | x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot | x)$, we can use Monte Carlo integration—just sample a bunch of iid $Z_i$'s from that distribution (again, easy by assumption), and then average the term in square brackets in the ELBO over the samples.
+- _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z | x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees, and it seems to work pretty well in practice.
 
 ### An example. 
- 
+ In many applications $Z$ has a simple, unparameterized, distribution, say $\mathcal{N}(0,I)$, and $X \mid Z = z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. We can load a lot of modeling complexity into the $mu, \Sigma$ functions, and this still satisfies 1 above:..
  extra flexiblity bough because the mean and variance functions may be complex neural networks...
 
 
