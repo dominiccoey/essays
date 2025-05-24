@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes, it's an example of a highly leveraged concept. If you understand it, you automatically have insights into a variety of different areas—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Some applications include statistics (the EM algorithm, variational Bayes), ML (diffusion models, variational autoencoders), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes, it's an example of a highly leveraged concept. If you understand it, you automatically have insights into a variety of different areas—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Some applications include statistics (the EM algorithm, variational Bayes), ML (diffusion models, variational autoencoders), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
 
 This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
 
@@ -34,7 +34,18 @@ So the marginal likelihood can be written as $\ln p_\theta(x) = L(\phi, \theta; 
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
 ## Why is it important?
-In brief—if we are facing a problem where the marginal likelihood is intractable
+In brief—**ELBO helps us approximately maximize intractable likelihood functions.** Suppose our marginal likelihood $p_\theta(x)$ is hard to compute. If we are willing to specify some latent variables $Z$ such that $p_\theta(x,z)$ is easy to compute, and some reasonably flexible model $q_\phi(z \mid x) which is also easy to compute, then we can use the ELBO in place of the marginal likelihood as a surrogate objective. Maximizing the ELBO will approximately maximize the marginal likelihood.
+
+Two other benefits which depending on the application may be critical or unimportant:
+1. Optimizating the ELBO also produces a conditional mean function $q\phi(z \mid x)$ which approximates the true conditional mean $p_{theta_0}(z \mid x)$
+2. We can easily generate iid samples of new data $X$ from the marginal likelihood $p_\theta(x)$
+
+
+
+
+
+### Couldn't we just have evaluated the marginal likelihood by MC too?
+
 need to evaluate a marginal likelihood, or a posterior, and get the benefits of a generative model
 
 ## Applications
