@@ -58,8 +58,5 @@ Similarly, for conditional $q_\phi(z \mid x)$ we can choose $\mathcal{N}(m(x;\th
 
 [^2]: Normalizing flows..
 
-### Applications.
-
-
 
 ## Applications
