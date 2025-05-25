@@ -34,7 +34,7 @@ So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}( q
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
 ## Why is it important?
-**ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, from maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where e.g. we want to generate new images similar to the training images.
+**ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where e.g. we want to generate new images similar to the training images.
 
 ### How does ELBO work?
 Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[^2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
@@ -52,22 +52,14 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
  
 While in general the marginal density $p_\theta(x) = \int p_\theta(x,z) dy$ is expensive to evaluate accurately, the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
 
-Similarly, for conditional $q_\phi(z \mid x)$ we can choose $\mathcal{N}(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. Thus we've satisfied 1 and 2 anove.
+Similarly, for conditional $q_\phi(z \mid x)$ we can choose $\mathcal{N}(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. Thus we've satisfied 1 and 2 above. We can maximize the ELBO, and we because of the latent variable structure we can easily generate new samples—simply draw Z from $\mathcal{N}(0,I)$, and then $X$ given $Z = z$ from $\mathcal{N}(\mu(z;\theta), \Sigma(z;\theta))$.
 
-**An aside.** Above I said that we can evaluate the expectation in the ELBO by Monte Carlo. But if we're ok with using Monte Carlo, one might object, why not just evaluate the marginal density itself directly by Monte Carlo? After all, if given the latent variable structure we postulated, we could get an unbiased estimate of $p_\theta(x)$ by taking iid samples $z_1,\ldots z_n$ from $\mathcal{N}(0,I)$, and calculating $\sum_{i = 1}^n p_\theta(x \mid z_i)$. The problem is that this will produce unusefully high variance results. To continue the example where we're working with image data—almost no latent variables $z$ will generate anything close to a given image $x$, so $p_\theta(x \mid z_i)$ will be close to zero with extremely high probability. Note how ELBO avoids this...
-
-
- 
-
+**An aside.** Above I said that we can evaluate the expectation in the ELBO by Monte Carlo. But then why not just evaluate the marginal density itself directly by Monte Carlo? Given the latent variable structure we postulated, we could get an unbiased estimate of $p_\theta(x)$ by taking iid samples $z_1,\ldots, z_n$ from $\mathcal{N}(0,I)$, and calculating $\sum_{i = 1}^n p_\theta(x \mid z_i)$. The problem is that this will be unusefully high variance. To continue the example of image data—almost no latent variables $z$ will generate anything close to a given image $x$, so for every $x$ $p_\theta(x \mid z_i)$ will be close to zero with extremely high probability. Note how ELBO avoids this: we don't average over the marginal distribution of $Z$, we average over the conditional distribution $q_\phi(z | x)$. This concentrates probability mass on $z$'s which are likely to have generated $x$, so we won't be averaging over a bunch of terms almost all of which are zero.
 
 [^2]: Normalizing flows..
 
-### How 
+### Applications.
 
 
-
-### Couldn't we just have evaluated the marginal likelihood by MC too?
-
-need to evaluate a marginal likelihood, or a posterior, and get the benefits of a generative model
 
 ## Applications
