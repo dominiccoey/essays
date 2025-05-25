@@ -48,8 +48,16 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 - _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z | x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees, and it seems to work pretty well in practice.
 
 ### An example. 
- In many applications $Z$ has a simple, unparameterized, distribution, say $\mathcal{N}(0,I)$, and $X \mid Z = z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. We can load a lot of modeling complexity into the $mu, \Sigma$ functions, and this still satisfies 1 above:..
- extra flexiblity bough because the mean and variance functions may be complex neural networks...
+ In many applications $Z$ is a simple, unparameterized, distribution like $\mathcal{N}(0,I)$, and $X \mid Z = z$ is $\mathcal{N}(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions can be multilayer neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
+ 
+While in general the marginal density $p_\theta(x) = \int p_\theta(x,z) dy$ is expensive to evaluate accurately, the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
+
+Similarly, for conditional $q_\phi(z \mid x)$ we can choose $\mathcal{N}(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. Thus we've satisfied 1 and 2 anove.
+
+**An aside.** Above I said that we can evaluate the expectation in the ELBO by Monte Carlo. But if we're ok with using Monte Carlo, one might object, why not just evaluate the marginal density itself directly by Monte Carlo? After all, if given the latent variable structure we postulated, we could get an unbiased estimate of $p_\theta(x)$ by taking iid samples $z_1,\ldots z_n$ from $\mathcal{N}(0,I)$, and calculating $\sum_{i = 1}^n p_\theta(x \mid z_i)$. The problem is that this will produce unusefully high variance results. To continue the example where we're working with image data—almost no latent variables $z$ will generate anything close to a given image $x$, so $p_\theta(x \mid z_i)$ will be close to zero with extremely high probability. Note how ELBO avoids this...
+
+
+ 
 
 
 [^2]: Normalizing flows..
