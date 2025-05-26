@@ -15,7 +15,7 @@ This note explains the ELBO and how it applies in the examples above, not assumi
 **Definition.** The evidence lower bound is $L(\phi, \theta; x)$ is
 
 $$
-L(\phi, \theta; x) = E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,  z)}{q_\phi(z\midx)} \right].
+L(\phi, \theta; x) = E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,  z)}{q_\phi(z\mid x)} \right].
 $$
 
 **Relation to marginal likelihood.** We can write 
@@ -67,7 +67,7 @@ Similarly, for conditional $q_\phi(z \mid x)$ we can choose $\mathcal{N}(m(x;\th
 What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes $$\theta_{t+1} \leftarrow \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$ This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$, with $\phi$ fixed and with respect to $\phi$, with $\theta$ fixed.
 
 #### Variational Bayes
-Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**.
+Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
 
 ### Machine Learning
 #### Diffusion models
