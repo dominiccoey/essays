@@ -30,4 +30,4 @@ L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{p_\theta(x,  z
 $$
 
 
-So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z|x) \parallel p_\theta(z|x))$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
+So the marginal likelihood is 
