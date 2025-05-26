@@ -30,4 +30,4 @@ L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{p_\theta(x,  z
 $$
 
 
-So the marginal likelihood is 
+So the marginal likelihood is $\phi$
