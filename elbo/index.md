@@ -21,17 +21,16 @@ $$
 **Relation to marginal likelihood.** We can write 
 
 $$
-\begin{align}
+\begin{align*}
 L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{p_\theta(x,  z)}{q_\phi(z|x)} \right] \\
 &= E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{p_\theta(x) p_\theta(z \mid x)}{q_\phi(z|x)} \right]  \\
 &= \ln p_\theta(x) + E_{z\sim q_\phi(\cdot | x)} \left[ \ln\frac{ p_\theta(z \mid x)}{q_\phi(z|x)} \right] \\
 &= \ln p_\theta(x) - D_{KL}(q_\phi(z | x) \parallel p_\theta(z \mid x))
-\end{align}
+\end{align*}
 $$
 
-So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z|x) \parallel p_\theta(z|x))$.
 
-And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
+So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z|x) \parallel p_\theta(z|x))$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
 
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
@@ -64,7 +63,9 @@ Similarly, for conditional $q_\phi(z \mid x)$ we can choose $\mathcal{N}(m(x;\th
 ## Applications
 ### Statistics
 #### The EM algorithm
-What if we can calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes $$\theta_{t+1} \leftarrow \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$ This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$, with $\phi$ fixed and with respect to $\phi$, with $\theta$ fixed.
+What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes $$\theta_{t+1} \leftarrow \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$ This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$, with $\phi$ fixed and with respect to $\phi$, with $\theta$ fixed.
+
+This is helpful in the case where $X \mid Z$ and $Z \mid X$ are both tractable, easy to calculate densities, but the marginal of $X$ is not.
 
 #### Variational Bayes
 Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**.
