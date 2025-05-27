@@ -74,17 +74,16 @@ This procedure is identical to iteratively maximizing the ELBO with respect to $
 ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
 
 ### Machine Learning
-#### Diffusion models
-The latent variable $z$ here is a _sequence_ $z_1,\ldots,z_T$, which add progressively more noise to the starting data. We start with
-
-$$z_1 = \sqrt{1 - \beta_1} x + \sqrt{\beta_1} \varepsilon_1$$
-
-and continue $z_t = \sqrt{1 - \beta_t} z_{t - 1} + \sqrt{\beta_t} \varepsilon_t$, for $t>1$ and for some sequence $\beta_1,\ldots,\beta_T$. The noise terms $\varepsilon_t$ are all independent $ \sim N(O,I)$.
-
 #### Variational Autoencoders
 
+#### Diffusion Models
+In diffusion models, we stipulate the process by $x$ is converted into the latent $z$ (the "encoder"). Unlike previous applications, this means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is to learn the reverse process (the "decoder"), which turns $z$ into $x$. We write the numerator in the ELBO as $p_\theta(x, z) = p_\theta(x \mid z) p_\theta(z)$ and learn $\theta$ by maximizing the ELBO.
 
+Why do we care about learning the decoder? The $z$ are noisy versions of the input data $x$, and if we can learn how to denoise the latent variables to generate sensible looking $x$'s, we have a good generative model.
 
-corresponds to ELBO where 
+Specifically:
 
+- **Encoder**, $x \to z$: the latent variable $z$ is really a _sequence_ $z_1,\ldots,z_T$, which adds progressively more noise to the starting data $x$. We start with $z_1 = \sqrt{1 - \beta_1} x + \sqrt{\beta_1} \varepsilon_1$ and continue iterating $z_t = \sqrt{1 - \beta_t} z_{t - 1} + \sqrt{\beta_t} \varepsilon_t$, for $t>1$ and a known sequence $\beta_1,\ldots,\beta_T$. The noise terms $\varepsilon_t$ are independent $N(0,I)$. As $T \to \infty$, all this added noise means $z_T$'s distribution becomes closer and closer to $N(0,I)$. 
+
+- **Decoder**, $z \to x$: we model $p_\theta(z_{t-1} \mid z_t)$ as normally distributed. Then we rewrite $p_\theta(x, z)$ in the ELBO as $p(z_T) \left[ \prod_{t = 2}^T p_\theta(z_{t-1} \mid z_t) \right] p_\theta(x \mid z_1)$. Because $z_T$ is treated as being $N(0,I)$ distributed, it is not parameterized by $\theta$.
 
