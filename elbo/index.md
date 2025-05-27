@@ -74,7 +74,7 @@ We specify an encoder (which turns the data $x$ into a latent variable $z$) and 
 
 This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) dy$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
 
-Because of the latent variable structure we can easily generate new samples from the model we fit—simply draw $Z$ from $N(0,I)$, and then $X \mid Z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$. 
+Because of the latent variable structure we can easily generate new samples from the model we fit—simply draw $Z$ from $N(0,I)$, and then $X \mid Z = z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$. 
 
 #### Diffusion Models
 Unlike variational autoencoders, we the encoding process has no unknown parameters, and involves iteratively adding noise with known variance to the input data. This means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is instead to learn the decoder, which turns $z$ into $x$. In more detail:
