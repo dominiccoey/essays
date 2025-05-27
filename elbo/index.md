@@ -49,7 +49,7 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 - _Easier to evaluate_: This is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z \mid x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot \mid x)$, we can use Monte Carlo integration—just sample a bunch of iid $Z_i$'s from that distribution (again, easy by assumption), and then average the term in square brackets in the ELBO over the samples.[^3]
 - _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees, and it seems to work pretty well in practice.
 
-### An example. 
+### An example.
  In many applications $Z$ is a simple, unparameterized, distribution like $N(0,I)$, and $X \mid Z = z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions can be multilayer neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
  
 While in general the marginal density $p_\theta(x) = \int p_\theta(x,z) dy$ is expensive to evaluate accurately, the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
@@ -75,6 +75,7 @@ ELBO provides an alternative to finding the posterior by MCMC. Here the latent v
 
 ### Machine Learning
 #### Variational Autoencoders
+As in the [example](#an-example) above, We consider the generative model where the latent variable $z$ is $N(0,I)$ and the data is 
 
 #### Diffusion Models
 In diffusion models, we stipulate the process by $x$ is converted into the latent $z$ (the "encoder"). Unlike previous applications, this means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is to learn the reverse process (the "decoder"), which turns $z$ into $x$. We write the numerator in the ELBO as $p_\theta(x, z) = p_\theta(x \mid z) p_\theta(z)$ and learn $\theta$ by maximizing the ELBO.
