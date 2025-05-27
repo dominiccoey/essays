@@ -71,11 +71,15 @@ $$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{
 This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
 
 #### Variational Bayes
-Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
+ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
 
 ### Machine Learning
 #### Diffusion models
+The latent variable $z$ here is a _sequence_ $z_1,\ldots,z_T$, which add progressively more noise to the starting data. We start with
 
+$$z_1 = \sqrt{1 - \beta_1} x + \sqrt{\beta_1} \varepsilon_1$$
+
+and continue $z_t = \sqrt{1 - \beta_t} z_{t - 1} + \sqrt{\beta_t} \varepsilon_t$, for $t>1$ and for some sequence $\beta_1,\ldots,\beta_T$. The noise terms $\varepsilon_t$ are all independent $ \sim N(O,I)$.
 
 #### Variational Autoencoders
 
