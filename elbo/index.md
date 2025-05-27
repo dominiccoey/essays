@@ -36,7 +36,7 @@ So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
 ## Why is it important?
-**ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where e.g. we want to generate new images similar to the training images.
+**ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where we want to generate new images similar to the training images.
 
 ## How does it work?
 Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[^2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
@@ -47,14 +47,7 @@ Here's where ELBO helps. If
 
 then we can use the ELBO in place of the marginal likelihood as an easier to evaluate, surrogate objective. Unpacking this claim:
 - _Easier to evaluate_: This is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z \mid x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot \mid x)$, we can use Monte Carlo integration—just sample a bunch of iid $Z_i$'s from that distribution (again, easy by assumption), and then average the term in square brackets in the ELBO over the samples.[^3]
-- _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees, and it seems to work pretty well in practice.
-
-### An example.
- In many applications $Z$ is a simple, unparameterized, distribution like $N(0,I)$, and $X \mid Z = z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions can be multilayer neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
- 
-While in general the marginal density $p_\theta(x) = \int p_\theta(x,z) dy$ is expensive to evaluate accurately, the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
-
-Similarly, for conditional $q_\phi(z \mid x)$ we can choose $N(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. Thus we've satisfied 1 and 2 above. We can maximize the ELBO, and we because of the latent variable structure we can easily generate new samples—simply draw Z from $N(0,I)$, and then $X$ given $Z = z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$.
+- _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees [[CITE HERE]], and it seems to work pretty well in practice.
 
 [^2]: Normalizing flows..
 
@@ -75,16 +68,23 @@ ELBO provides an alternative to finding the posterior by MCMC. Here the latent v
 
 ### Machine Learning
 #### Variational Autoencoders
-As in the [example](#an-example) above, We consider the generative model where the latent variable $z$ is $N(0,I)$ and the data is 
+We specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
+- **Encoder**, $x \to z$: The latent variable $Z$ is $N(0,I)$, and $X \mid Z = z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
+- **Decoder**, $z \to x$: We model $q_\phi(z \mid x)$ as $N(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. 
+
+This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) dy$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
+
+Because of the latent variable structure we can easily generate new samples from the model we fit—simply draw $Z$ from $N(0,I)$, and then $X \mid Z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$. 
 
 #### Diffusion Models
-In diffusion models, we stipulate the process by $x$ is converted into the latent $z$ (the "encoder"). Unlike previous applications, this means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is to learn the reverse process (the "decoder"), which turns $z$ into $x$. We write the numerator in the ELBO as $p_\theta(x, z) = p_\theta(x \mid z) p_\theta(z)$ and learn $\theta$ by maximizing the ELBO.
+Unlike variational autoencoders, we the encoding process has no unknown parameters, and involves iteratively adding noise with known variance to the input data. This means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is instead to learn the decoder, which turns $z$ into $x$. In more detail:
 
-Why do we care about learning the decoder? The $z$ are noisy versions of the input data $x$, and if we can learn how to denoise the latent variables to generate sensible looking $x$'s, we have a good generative model.
+- **Encoder**, $x \to z$: the latent variable $z$ is a _sequence_ $z_1,\ldots,z_T$, which adds progressively more noise to the starting data $x$. We start with $z_1 = \sqrt{1 - \beta_1} x + \sqrt{\beta_1} \varepsilon_1$ and continue iterating $z_t = \sqrt{1 - \beta_t} z_{t - 1} + \sqrt{\beta_t} \varepsilon_t$, for $t>1$ and a known sequence $\beta_1,\ldots,\beta_T$. The noise terms $\varepsilon_t$ are independent $N(0,I)$. As $T \to \infty$, all this added noise means $z_T$'s distribution becomes close to $N(0,I)$. 
 
-Specifically:
+- **Decoder**, $z \to x$: we model $p_\theta(z_{t-1} \mid z_t)$ as normally distributed. Then we rewrite $p_\theta(x, z)$ in the ELBO as $p(z_T) \left[ \prod_{t = 2}^T p_\theta(z_{t-1} \mid z_t) \right] p_\theta(x \mid z_1)$, and maximize the ELBO with respect to $\theta$ (because $z_T$ is treated as being $N(0,I)$ distributed, it is not parameterized by $\theta$).
 
-- **Encoder**, $x \to z$: the latent variable $z$ is really a _sequence_ $z_1,\ldots,z_T$, which adds progressively more noise to the starting data $x$. We start with $z_1 = \sqrt{1 - \beta_1} x + \sqrt{\beta_1} \varepsilon_1$ and continue iterating $z_t = \sqrt{1 - \beta_t} z_{t - 1} + \sqrt{\beta_t} \varepsilon_t$, for $t>1$ and a known sequence $\beta_1,\ldots,\beta_T$. The noise terms $\varepsilon_t$ are independent $N(0,I)$. As $T \to \infty$, all this added noise means $z_T$'s distribution becomes closer and closer to $N(0,I)$. 
+As with variational autoencoders, generating new samples is easy once the decoder is learned, as we have the distributions of $Z$ and $X \mid Z$.
 
-- **Decoder**, $z \to x$: we model $p_\theta(z_{t-1} \mid z_t)$ as normally distributed. Then we rewrite $p_\theta(x, z)$ in the ELBO as $p(z_T) \left[ \prod_{t = 2}^T p_\theta(z_{t-1} \mid z_t) \right] p_\theta(x \mid z_1)$. Because $z_T$ is treated as being $N(0,I)$ distributed, it is not parameterized by $\theta$.
+### Statistical Physics
+#### The Principle of Minimum Energy
 
