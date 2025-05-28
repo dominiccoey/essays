@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include ML (diffusion models, variational autoencoders), statistics (the EM algorithm, variational Bayes), statistical physics (the principle of minimum energy), computational biology (), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include ML (variational autoencoders, diffusion models), statistics (the EM algorithm, variational Bayes), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (Friston’s free-energy principle), and electrical engineering (). 
 
 This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
 
@@ -57,7 +57,7 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 ## Applications
 ### Machine Learning
 #### Variational Autoencoders
-We specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
+In a variational autoencoder (VAE) we specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
 - **Encoder**, $x \to z$: The latent variable $Z$ is $N(0,I)$, and $X \mid Z = z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
 - **Decoder**, $z \to x$: We model $q_\phi(z \mid x)$ as $N(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. 
 
@@ -66,13 +66,13 @@ This structure is well-suited to the ELBO approach. In general the marginal dens
 Because of the latent variable structure we can easily generate new samples from the model we fit—simply draw $Z$ from $N(0,I)$, and then $X \mid Z = z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$. 
 
 #### Diffusion Models
-Unlike variational autoencoders, we the encoding process has no unknown parameters, and involves iteratively adding noise with known variance to the input data. This means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is instead to learn the decoder, which turns $z$ into $x$. In more detail:
+Unlike VAEs, we the encoding process has no unknown parameters, and involves iteratively adding noise with known variance to the input data. This means that $q_\phi ( z \mid x)$ can be treated as fixed throughout, with no unknown parameters. The goal is instead to learn the decoder, which turns $z$ into $x$. In more detail:
 
 - **Encoder**, $x \to z$: the latent variable $z$ is a _sequence_ $z_1,\ldots,z_T$, which adds progressively more noise to the starting data $x$. We start with $z_1 = \sqrt{1 - \beta_1} x + \sqrt{\beta_1} \varepsilon_1$ and continue iterating $z_t = \sqrt{1 - \beta_t} z_{t - 1} + \sqrt{\beta_t} \varepsilon_t$, for $t>1$ and a known sequence $\beta_1,\ldots,\beta_T$. The noise terms $\varepsilon_t$ are independent $N(0,I)$. As $T \to \infty$, all this added noise means $z_T$'s distribution becomes close to $N(0,I)$. 
 
 - **Decoder**, $z \to x$: we model $p_\theta(z_{t-1} \mid z_t)$ as normally distributed. Then we rewrite $p_\theta(x, z)$ in the ELBO as $p(z_T) \left[ \prod_{t = 2}^T p_\theta(z_{t-1} \mid z_t) \right] p_\theta(x \mid z_1)$, and maximize the ELBO with respect to $\theta$ (because $z_T$ is treated as being $N(0,I)$ distributed, it is not parameterized by $\theta$).
 
-As with variational autoencoders, generating new samples is easy once the decoder is learned, as we have the distributions of $Z$ and $X \mid Z$.
+As with VAEs, generating new samples is easy once the decoder is learned, as we have the distributions of $Z$ and $X \mid Z$.
 
 ### Statistics
 #### The EM algorithm
@@ -96,9 +96,12 @@ $$
 
 The normalizing constant $Q$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$.[^4] Energy in any given system state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$. The partition function plays a critical role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. If $z$ is vector-valued, for example, we may make $q$ tractable by assuming that the component elements are independent. This is the _mean-field_ assumption. The optimization will often involve variational methods, and the negative ELBO is the called the variational free energy. 
+This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods, and the negative ELBO is the called the variational free energy. If $z$ is vector-valued, for example, we may make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
 
-See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on this equivalence.
+See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on the equivalence between the ELBO and variational methods in physics.
 
 [^4]: Implicitly the [thermodynamic beta](https://en.wikipedia.org/wiki/Thermodynamic_beta) is set to one here—we can think of this as rescaling energies so that $\beta = 1$.
+
+### Computational Biology
+One nice application is ["Deep generative modeling for single-cell transcriptomics"](https://www.nature.com/articles/s41592-018-0229-2). Here the data $x$ describes, for each cell, the degree to which it expresses one of many genes. The $z$ is the latent structure, which is much lower-dimensional than the number of genes (10 vs 100s - 10,000s). The modeling is similar to the variational autoencoder network example above, except the likelihood $p_\theta(x \mid z)$ is zero-inflated negative binomial, to fit the count data. Learning the latent structure allows us cluster or classify cells. Especially interesting though is cell _generation_—we can use this model to generate new synthetic cells, just as a VAE trained on image data allows us to generate new images! 
 
