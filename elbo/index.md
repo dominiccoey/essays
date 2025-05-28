@@ -29,13 +29,21 @@ L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,
 \end{align*}
 $$
 
-[[reconstruction interpretation of the ELBO, incl mutual info]]
-[[ELBO = ... + entropy ]]
+So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] 
 
 
-So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
+**Reconstruction plus consistency.** Another formulation is 
+
+$$
+L(\phi, \theta; x) = E_{z\sim q_\phi(\cdot \mid x)}[\ln p_\theta(x\mid z)] - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z)).
+$$
+
+The first term on the RHS—the _reconstruction term_—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term acts as a regularizer, and encourages $q_\phi(z \mid x)$ to be close to the prior $p_\theta(z)$ and not vary wildly with $x$.
 
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
+
+
+Ok—but what's the point of defining this quantity?
 
 ## Why is it important?
 **ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where we want to generate new images similar to the training images.
@@ -116,7 +124,6 @@ Here the latent variables $z$ are physical events and features in the world, whi
 
 We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same.
 
-There's an additional twist. In addition to learning about the state of the world (forming the posterior $q_\phi(z \mid x)$, this framework gives an account of how we take actions in the world. If we interpret $p_\theta(x)$ as a _target distribution of sensations we'd like to experience_, and 
 
 ### Information Theory
 #### Iterative Decoding
