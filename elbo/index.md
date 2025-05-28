@@ -110,11 +110,13 @@ Variational methods appear to becoming more common in biology. One nice applicat
 
 ### Neuroscience 
 #### Free-Energy Principle
-An influential theory in neuroscience is Karl Friston's [Free-Energy Princple](https://www.nature.com/articles/nrn2787), which views the brain as basically performing variational inference to understand the world. Here the latent variables $z$ are physical events and features in the world, which then generate sensory input $x$  (e.g. light on the retina or cochlear vibration). The brain is assumed to have some understanding of the kinds of $z$ out in the world, and how they map to $x$—in other words, a generative model $p_\theta(x)$ and $p_\theta(z \mid x). We wish to form an accurate understanding of what's going on in the physical world given the sense data, i.e. an approximate posterior $q_\phi(z \mid x)$. The parameters $(\theta, \phi)$ correspond to synaptic strengths in the brain.
+An influential theory in neuroscience is Karl Friston's [Free-Energy Princple](https://www.nature.com/articles/nrn2787). It exemplifies the Bayesian brain hypothesis, which posits that the brain has a built-in generative model of the world which it uses to construct posterior beliefs. Friston's theory has the brain effectively performing variational inference to understand the world.
+
+Here the latent variables $z$ are physical events and features in the world, which then generate sensory input $x$  (e.g. light on the retina or cochlear vibration). The brain is assumed to have some understanding of the kinds of $z$ out in the world, and how they map to $x$—in other words, a generative model $p_\theta(x)$ and $p_\theta(z \mid x). We wish to form an accurate understanding of what's going on in the physical world given the sense data, i.e. an approximate posterior $q_\phi(z \mid x)$, called the "recognition density" here. The parameters $(\theta, \phi)$ correspond to synaptic strengths in the brain. 
 
 We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same.
 
-There's an additional twist. In addition to learning about the state of the world (forming the posterior $q_\phi(z \mid x)$), Friston describes how this framework can be used to explain how we take actions in the world.
+There's an additional twist. In addition to learning about the state of the world (forming the posterior $q_\phi(z \mid x)$, this framework gives an account of how we take actions in the world. If we interpret $p_\theta(x)$ as a _target distribution of sensations we'd like to experience_, and 
 
 ### Information Theory
 #### Iterative Decoding
