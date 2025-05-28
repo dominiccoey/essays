@@ -55,17 +55,6 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 
 
 ## Applications
-### Statistics
-#### The EM algorithm
-What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes 
-
-$$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
-
-This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
-
-#### Variational Bayes
-ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
-
 ### Machine Learning
 #### Variational Autoencoders
 We specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
@@ -85,6 +74,31 @@ Unlike variational autoencoders, we the encoding process has no unknown paramete
 
 As with variational autoencoders, generating new samples is easy once the decoder is learned, as we have the distributions of $Z$ and $X \mid Z$.
 
+### Statistics
+#### The EM algorithm
+What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes 
+
+$$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
+
+This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
+
+#### Variational Bayes
+ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
+
+
 ### Statistical Physics
-#### The Principle of Minimum Energy
+#### Thermodynamics
+The [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution) specifies the probability of a state $i \in \{1,\ldots,M\}$,
+
+$$
+p_i=\frac{1}{Q} \exp\left(- \frac{\varepsilon_i}{kT} \right)  = \frac{ \exp\left(- \tfrac{\varepsilon_i}{kT} \right) }{ \displaystyle \sum_{j=1}^{M} \exp\left(- \tfrac{\varepsilon_j}{kT} \right) },
+$$
+
+where the normalizing constant $Q$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$. The constants $k,T$ don't pay an important role in what follows. Energy in any given system state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$.
+
+The partition function plays an important role in determining the system behavior [[clarify]], but may take impractically long to compute if the number of system states $M$ is enormous.
+
+We can now apply ELBO. We write the log joint density of the ELBO as $\log p(x,z) = E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the partition function by maximizing the ELBO. This often will involve variational methods, and the (negative) ELBO is the called the variational free energy. 
+
+The ELBO in this context is called the negative variational free energy, and this lower bound on the partition function is known as the Bogoliubov inequality. See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on this equivalence.
 
