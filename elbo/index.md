@@ -88,17 +88,17 @@ ELBO provides an alternative to finding the posterior by MCMC. Here the latent v
 
 ### Statistical Physics
 #### Thermodynamics
-The [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution) specifies the probability of a state $i \in \{1,\ldots,M\}$,
+The [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution) specifies the probability of a state $i \in \\{1,\ldots,M\\}$,
 
 $$
-p_i=\frac{1}{Q} \exp\left(- \frac{\varepsilon_i}{kT} \right)  = \frac{ \exp\left(- \tfrac{\varepsilon_i}{kT} \right) }{ \displaystyle \sum_{j=1}^{M} \exp\left(- \tfrac{\varepsilon_j}{kT} \right) },
+p_i=\frac{1}{Q} \exp\left(- \beta \varepsilon_i \right)  = \frac{ \exp\left(- \beta \varepsilon_i \right) }{ \displaystyle \sum_{j=1}^{M} \exp\left(- \beta \varepsilon_j \right) },
 $$
 
-where the normalizing constant $Q$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$. The constants $k,T$ don't pay an important role in what follows. Energy in any given system state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$.
+where the normalizing constant $Q$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$. The constant $\beta$ is the [thermodynamic beta](https://en.wikipedia.org/wiki/Thermodynamic_beta), and doesn't play an important role in what follows. Energy in any given system state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$.
 
-The partition function plays an important role in determining the system behavior [[clarify]], but may take impractically long to compute if the number of system states $M$ is enormous.
+The partition function plays a critical important role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-We can now apply ELBO. We write the log joint density of the ELBO as $\log p(x,z) = E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the partition function by maximizing the ELBO. This often will involve variational methods, and the (negative) ELBO is the called the variational free energy. 
+This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the partition function by maximizing the ELBO. This often will involve variational methods, and the (negative) ELBO is the called the variational free energy. 
 
 The ELBO in this context is called the negative variational free energy, and this lower bound on the partition function is known as the Bogoliubov inequality. See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on this equivalence.
 
