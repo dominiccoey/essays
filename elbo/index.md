@@ -98,7 +98,7 @@ where the normalizing constant $Q$ is known as the "partition function", and $\v
 
 The partition function plays a critical important role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. This often will involve variational methods, and the (negative) ELBO is the called the variational free energy. See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on this equivalence.
+This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. This often will involve variational methods, and the negative ELBO is the called the variational free energy. See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on this equivalence.
 
 [^4]: Implicitly the [thermodynamic beta](https://en.wikipedia.org/wiki/Thermodynamic_beta) is set to one here—we can think of this as rescaling energies so that $\beta = 1$.
 
