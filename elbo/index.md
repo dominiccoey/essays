@@ -29,7 +29,7 @@ L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,
 \end{align*}
 $$
 
-So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] 
+Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, we see that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] We also see that maximizing the ELBO with respect to $(\phi, \theta)$ encourages a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
 
 
 **Reconstruction plus consistency.** Another formulation is 
@@ -37,6 +37,9 @@ So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_
 $$
 L(\phi, \theta; x) = E_{z\sim q_\phi(\cdot \mid x)}[\ln p_\theta(x\mid z)] - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z)).
 $$
+
+The first term on the RHS—the _reconstruction_ term—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term—the _consistency_ term—acts as a regularizer, and encourages $q_\phi(z \mid x)$ to be close to the prior $p_\theta(z)$ and not vary wildly with $x$.
+
 
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
@@ -55,10 +58,6 @@ Here's where ELBO helps. If
 then we can use the ELBO in place of the marginal likelihood as an easier to evaluate, surrogate objective. Unpacking this claim:
 - _Easier to evaluate_: This is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z \mid x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot \mid x)$, we can use Monte Carlo integration—just sample a bunch of iid $Z_i$'s from that distribution (again, easy by assumption), and then average the term in square brackets in the ELBO over the samples.[^3]
 - _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees [[CITE HERE]], and it seems to work pretty well in practice.
-
-
-**[edit] The first term on the RHS—the _reconstruction term_—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term acts as a regularizer, and encourages $q_\phi(z \mid x)$ to be close to the prior $p_\theta(z)$ and not vary wildly with $x$.**
-
 
 [^2]: Normalizing flows..
 
