@@ -88,7 +88,7 @@ ELBO provides an alternative to finding the posterior by MCMC. Here the latent v
 
 ### Statistical Physics
 #### Variational Free Energy
-[Some physical systems](https://en.wikipedia.org/wiki/Canonical_ensemble) are well described by the [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution) which specifies the probability of a state $i \in \\{1,\ldots,M\\}$ as,
+[Some physical systems](https://en.wikipedia.org/wiki/Canonical_ensemble) are well described by the [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution), which specifies the probability of a state $i \in \\{1,\ldots,M\\}$ as
 
 $$
 p_i=\frac{1}{Q} \exp\left(-  \varepsilon_i \right)  = \frac{ \exp\left(-  \varepsilon_i \right) }{ \displaystyle \sum_{j=1}^{M} \exp\left(- \varepsilon_j \right) },
