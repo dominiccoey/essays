@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include ML (variational autoencoders, diffusion models), statistics (the EM algorithm, variational Bayes), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (Friston’s free-energy principle), and information theory (iterative decoding). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include statistics (the EM algorithm, variational Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (the free-energy principle), and information theory (iterative decoding). 
 
 This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
 
@@ -29,6 +29,8 @@ L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,
 \end{align*}
 $$
 
+[[reconstruction interpretation of the ELBO, incl mutual info]]
+[[ELBO = ... + entropy ]]
 
 
 So the marginal likelihood is $\ln p_\theta(x) = L(\phi, \theta; x) +  D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. And [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, so we know that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Ok—but what's the point of defining this quantity?
@@ -55,6 +57,18 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 
 
 ## Applications
+### Statistics
+#### The EM algorithm
+What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes 
+
+$$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
+
+This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
+
+#### Variational Bayes
+ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
+
+
 ### Machine Learning
 #### Variational Autoencoders
 In a variational autoencoder (VAE) we specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
@@ -73,18 +87,6 @@ Unlike VAEs, we the encoding process has no unknown parameters, and involves ite
 - **Decoder**, $z \to x$: we model $p_\theta(z_{t-1} \mid z_t)$ as normally distributed. Then we rewrite $p_\theta(x, z)$ in the ELBO as $p(z_T) \left[ \prod_{t = 2}^T p_\theta(z_{t-1} \mid z_t) \right] p_\theta(x \mid z_1)$, and maximize the ELBO with respect to $\theta$ (because $z_T$ is treated as being $N(0,I)$ distributed, it is not parameterized by $\theta$).
 
 As with VAEs, generating new samples is easy once the decoder is learned, as we have the distributions of $Z$ and $X \mid Z$.
-
-### Statistics
-#### The EM algorithm
-What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes 
-
-$$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
-
-This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
-
-#### Variational Bayes
-ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
-
 
 ### Statistical Physics
 #### Variational Statistical Mechanics
@@ -107,7 +109,13 @@ See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_9
 Variational methods appear to becoming more common in biology. One nice application is ["Deep generative modeling for single-cell transcriptomics"](https://www.nature.com/articles/s41592-018-0229-2). Here the data $x$ describes, for each cell, the degree to which it expresses one of many genes. The $z$ is the latent structure, which is much lower-dimensional than the number of genes: a cell is a 10-dimensional vector in latent space, but expresses 100s - 10,000s genes in these datasets. The modeling is similar to the variational autoencoder network example above, except the likelihood $p_\theta(x \mid z)$ is zero-inflated negative binomial, to fit the count data. Learning the latent structure allows us cluster or classify cells. Especially intriguing though is cell _generation_—we can use this model to generate new synthetic cells, just as a VAE trained on image data allows us to generate new images! 
 
 ### Neuroscience 
-#### Friston’s Free-Energy Principle
+#### Free-Energy Principle
+An influential theory in neuroscience is Karl Friston's [Free-Energy Princple](https://www.nature.com/articles/nrn2787), which views the brain as basically performing variational inference to understand the world. Here the latent variables $z$ are physical events and features in the world, which then generate sensory input $x$  (e.g. light on the retina or cochlear vibration). The brain is assumed to have some understanding of the kinds of $z$ out in the world, and how they map to $x$—in other words, a generative model $p_\theta(x)$ and $p_\theta(z \mid x). We wish to form an accurate understanding of what's going on in the physical world given the sense data, i.e. an approximate posterior $q_\phi(z \mid x)$. The parameters $(\theta, \phi)$ correspond to synaptic strengths in the brain.
+
+We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same.
+
+There's an additional twist. In addition to learning about the state of the world (forming the posterior $q_\phi(z \mid x)$), Friston describes how this framework can be used to explain how we take actions in the world.
 
 ### Information Theory
 #### Iterative Decoding
+infomax principle? efficient coding?
