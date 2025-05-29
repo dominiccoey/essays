@@ -5,9 +5,9 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include statistics (the EM algorithm, variational Bayes, empirical Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (the free-energy principle), and information theory (iterative decoding). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. An incomplete list of applications and fields includes statistics (the EM algorithm, variational Bayes, empirical Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (the free-energy principle), and information theory (iterative decoding). 
 
-This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
+This note explains the ELBO and how it applies in the examples above.
 
 ## What is it?
 **Setup.** We have observed variables $X$ and latent variables $Z$. We have a parametric model $p_\theta(x,z)$, and $(X,Z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We have an additional model for the conditional distribution $q_\phi(z \mid x)$, the role of which will become clear shortly. 
