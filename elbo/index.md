@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include statistics (the EM algorithm, variational Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (the free-energy principle), and information theory (iterative decoding). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Application areas include statistics (the EM algorithm, variational Bayes, empirical Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (the free-energy principle), and information theory (iterative decoding). 
 
 This note explains the ELBO and how it applies in the examples above, not assuming much more than a basic statistics background.
 
@@ -80,12 +80,8 @@ MCMC methods allow us, at least in the limit, to draw exact samples from the pos
 
 An example of such a restriction when $z$ is vector-valued is that $Q$ is a _mean-field_ family. Write $z = (z^{(1)},\ldots,z^{(k)})$. Then the mean-field assumption is just that the components are independent, and $q$ factors as $q(z \mid x) = \prod_{i = 1}^k q_i( z_i \mid x)$.
 
-
-#### Empirical Bayes
-[[Maximizing the marginal likelihood]] "The premise is that the bound is a good approximation of the marginal likelihood,
-which provides a basis for selecting a model. Though this sometimes works in practice, selecting based on a bound is not justified in theory"
-
-
+#### Empirical Bayes Hyperparameter Selection
+In empirical Bayes, as in variational Bayes, the $z$ are parameters of interest. Unlike in variational Bayes, we _do_ have some unknown hyperparameters in the density $p_\theta(x, z)$. The classic approach would be to choose them by maximizing the marginal likelihood. And if that's hard to compute? Maximizing ELBO is a natural alternative! The argument is that if we choose a rich enough posterior family, we'll get close to the true posterior, and maximizing ELBO will be close to maximizing the marginal likelihood.
 
 ### Machine Learning
 #### Variational Autoencoders
