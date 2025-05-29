@@ -5,48 +5,54 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) comes up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into many different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Remarkably, diffusion models in generative AI, variational statistical mechanics, and the free-energy model of the brain all share the same common mathematical structure. 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) comes up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into many different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Remarkably, diffusion models in generative AI, variational statistical mechanics, and the free-energy model of the brain all share a common mathematical structure. 
 
 This note explains the ELBO and how it applies, in a [somewhat eclectic selection of examples](#what-does-this-look-like-in-practice) from statistics, machine learning, statistical physics, computational biology, and neuroscience.
 
 ## What is it?
-**Basic setup.** We have observed variables $X$ and latent variables $Z$. We have a model $p_\theta(x,z)$, and $(X,Z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We have an additional model for the conditional distribution $q_\phi(z \mid x)$, the role of which will become clear shortly. 
+**Basic setup.** We have observed random variables $x$ and latent random variables $z$. We have a statistical model $p_\theta(x,z)$, and $(x,z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$.[^1] We specify an additional model for the conditional distribution, $q_\phi(z \mid x)$. This will be used to approximate the true conditional $p_{\theta_0}(z \mid x)$.
 
-**Definition.** The evidence lower bound is $L(\phi, \theta; x)$ is
+**Definition.** The _evidence lower bound_, $L(\phi, \theta; x)$, is
 
 $$
 L(\phi, \theta; x) = E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,  z)}{q_\phi(z\mid x)} \right].
 $$
 
+This may seem a bit mysterious. Two equivalent perspectives shedding more light on this definition follow.
+
 **Relation to marginal likelihood.** We can write 
 
 $$
 \begin{align*}
-L(\phi, \theta; x) &= E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x,  z)}{q_\phi(z \mid x)} \right] \\
+L(\phi, \theta; x)
 &= E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(x) p_\theta(z \mid x)}{q_\phi(z \mid x)} \right]  \\
 &= \ln p_\theta(x) + E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{ p_\theta(z \mid x)}{q_\phi(z \mid x)} \right] \\
 &= \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))
 \end{align*}
 $$
 
-Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, we see that the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] We also see that maximizing the ELBO with respect to $(\phi, \theta)$ encourages a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
+Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
 
 
-**Reconstruction plus consistency.** Another formulation is 
+**Reconstruction plus consistency.** Equivalently we can write
 
 $$
-L(\phi, \theta; x) = E_{z\sim q_\phi(\cdot \mid x)}[\ln p_\theta(x\mid z)] - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z)).
+\begin{align*}
+L(\phi, \theta; x) 
+&= E_{z\sim q_\phi(\cdot \mid x)} \left[ \ln\frac{p_\theta(z) p_\theta(x \mid z)}{q_\phi(z \mid x)} \right]  \\
+&= E_{z\sim q_\phi(\cdot \mid x)}[\ln p_\theta(x\mid z)] - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z)).
+\end{align*}
 $$
 
-The first term on the RHS—the _reconstruction_ term—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term—the _consistency_ term—acts as a regularizer, and encourages $q_\phi(z \mid x)$ to be close to the prior $p_\theta(z)$ and not vary wildly with $x$.
+Let's again consider what happens when we maximize the ELBO over $(\phi, \theta)$. The first term on the RHS—the _reconstruction_ term—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term—the _consistency_ term—acts as a regularizer, and rewards a $q_\phi(z \mid x)$ which is close to the prior $p_\theta(z)$, and in particular does not vary wildly with $x$.
 
-
+[^1]: Alternatively if the true distribution is not in the model class, we can think of $\theta_0$ as being the closest distribution in the model class to the truth, in the sense of minimizing KL-divergence.
 [^1]: Why is $\ln p_\theta(x)$ called the evidence?
 
-Ok—but what's the point of defining this quantity?
+But if we're interested in evaluating the marginal likelihood $p_\theta(x)$, why not calculate it directly, rather than introducing all this additional complexity of the approximating family $q_\phi(z\mid x)$?
 
 ## Why is it important?
-**ELBO helps us approximately maximize intractable likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data $X$ similar to the training data. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where we want to generate new images similar to the training images.
+**ELBO helps us approximately evaluate and maximize intractable likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data similar to the training data $x$. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where we want to generate new images similar to the training images.
 
 ## How does it work?
 Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[^2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
