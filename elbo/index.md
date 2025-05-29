@@ -62,16 +62,16 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 ## What does this look like in practice?
 Below is a list of some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further.
 
-|  application | goal |  $x$ (input data) | $z$ (latent data) | $\theta$ | $\phi$
+|  application | goal |  $x$  | $z$ | $\theta$ | $\phi$
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-| [_EM algorithm_](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)    | estimate parameters | varies  | varies   | parameterizes joint distribution | same as $\theta$, posterior is known exactly |
-| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | obtain posterior over parameters of interest | varies | parameters of interest | none | describes the nonparametric approximating posterior | 
-| [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters | varies  | unknown parameters | unknown hyperparameters | parameterizes approximating posterior |
-| [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | varies, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
-| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | varies, often images |  lower-dimensional input representation | none | parameterizes encoder neural network |
-| [_Variational statistical mechanics_](https://en.wikipedia.org/wiki/Helmholtz_free_energy)  | approximate partition function | none | physical states | none | describes the nonparametric approximating posterior |
-| [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | find posterior of z given x  | cell-level gene expression  | lower-dimensional cell representation | parameterizes generative model from z to x | parameterizes approximate posterior |
-| [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | find posterior of z given x  | sensory data  | state of the world  | parameterizes generative model from z to x | parameterizes approximate posterior |
+| [_EM algorithm_](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)    | estimate parameters $\theta$ | depends  | depends   | parameterizes joint distribution of $(x,z)$ | same as $\theta$; posterior $z \mid x$ is known exactly |
+| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | obtain posterior over $z$ | depends | parameters of interest | none | describes the nonparametric approximate posterior | 
+| [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters $\theta$ | depends  | parameters of interest | hyperparameters of joint distribution of $(x,z)$  | parameterizes approximating posterior |
+| [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | depends, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
+| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | depends, often images |  lower-dimensional input representation | none, decoder known | parameterizes encoder neural network |
+| [_Variational statistical mechanics_](https://en.wikipedia.org/wiki/Helmholtz_free_energy)  | approximate partition function | none | physical states | none | describes the nonparametric approximate state distribution |
+| [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | find posterior $z \mid x$  | cell-level gene expression  | lower-dimensional cell representation | parameterizes generative model of $z$, $x \mid z$ | parameterizes approximate posterior |
+| [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | find posterior of $z \mid x$  | sensory data  | state of the world  | parameterizes generative model of $z$, $x \mid z$ | parameterizes approximate posterior |
 
 
 [^2]: Normalizing flows..
