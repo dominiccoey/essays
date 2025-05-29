@@ -60,7 +60,7 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 - _Surrogate objective_: The ELBO is often a reasonable surrogate. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. If we choose a relatively rich class of approximating posteriors $q_\phi(z \mid x)$, then KL divergence term will tend to be small, and maximizing ELBO approximately maximizes the marginal likelihood.
 
 ## What does this look like in practice?
-Below is a list of some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further.
+Below are some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further.
 
 |  application | goal |  $x$  | $z$ | $\theta$ | $\phi$
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
