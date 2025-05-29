@@ -10,7 +10,7 @@ The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (
 This note explains the ELBO and how it applies in the examples above.
 
 ## What is it?
-**Basic Setup.** We have observed variables $X$ and latent variables $Z$. We have a parametric model $p_\theta(x,z)$, and $(X,Z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We have an additional model for the conditional distribution $q_\phi(z \mid x)$, the role of which will become clear shortly. 
+**Basic setup.** We have observed variables $X$ and latent variables $Z$. We have a parametric model $p_\theta(x,z)$, and $(X,Z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We have an additional model for the conditional distribution $q_\phi(z \mid x)$, the role of which will become clear shortly. 
 
 **Definition.** The evidence lower bound is $L(\phi, \theta; x)$ is
 
