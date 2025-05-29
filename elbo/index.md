@@ -5,7 +5,7 @@ permalink: /elbo/
 ---
 #### May 23, 2025
 
-The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. An incomplete list of applications and fields includes statistics (the EM algorithm, variational Bayes, empirical Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression), neuroscience (the free-energy principle), and information theory (iterative decoding). 
+The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) pops up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into a variety of different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. An incomplete list of applications and fields includes statistics (the EM algorithm, variational Bayes, empirical Bayes), ML (variational autoencoders, diffusion models), statistical physics (variational statistical mechanics), computational biology (modeling single-cell gene expression) and neuroscience (the free-energy model of the brain).
 
 This note explains the ELBO and how it applies in the examples above.
 
@@ -57,11 +57,27 @@ Here's where ELBO helps. If
 
 then we can use the ELBO in place of the marginal likelihood as an easier to evaluate, surrogate objective. Unpacking this claim:
 - _Easier to evaluate_: This is a consequence of 1 and 2. The ratio term in the ELBO, $\frac{p_\theta(x,y)}{q_\phi(z \mid x)}$, is easy to compute by assumption. And to find the expectation with respect to $q_\phi(\cdot \mid x)$, we can use Monte Carlo integration—just sample a bunch of iid $Z_i$'s from that distribution (again, easy by assumption), and then average the term in square brackets in the ELBO over the samples.[^3]
-- _Surrogate objective_: The ELBO is a reasonable surrogate, because maximizing the ELBO approximately maximizes the marginal likelihood. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$.  Our gradient steps for $\theta$ will tend to increase the marginal likelihood. This will change $p_\theta(z \mid x)$, and our gradient step for $\phi$ will tighten the KL gap so $q_\phi(z \mid x)$ better tracks $p_\theta(z\mid x)$. This is a bit hand-wavy, but there are formal convergence guarantees [[CITE HERE]], and it seems to work pretty well in practice.
+- _Surrogate objective_: The ELBO is often a reasonable surrogate. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. If we choose a relatively rich class of approximating posteriors $q_\phi(z \mid x)$, then KL divergence term will tend to be small, and maximizing ELBO approximately maximizes the marginal likelihood.
+
+## What does this look like in practice?
+Below is a list of some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further.
+
+|  application | goal |  $x$ (input data) | $z$ (latent data) | $\theta$ | $\phi$
+| ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
+| [_EM algorithm_](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)    | estimate parameters | varies  | varies   | parameterizes joint distribution | same as $\theta$, posterior is known exactly |
+| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | obtain posterior over parameters of interest | varies | parameters of interest | none | describes the nonparametric approximating posterior | 
+| [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters | varies  | unknown parameters | unknown hyperparameters | parameterizes approximating posterior |
+| [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | varies, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
+| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | varies, often images |  lower-dimensional input representation | none | parameterizes encoder neural network |
+| [_Variational statistical mechanics_](https://en.wikipedia.org/wiki/Helmholtz_free_energy)  | approximate partition function | none | physical states | none | describes the nonparametric approximating posterior |
+| [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | find posterior of z given x  | cell-level gene expression  | lower-dimensional cell representation | parameterizes generative model from z to x | parameterizes approximate posterior |
+| [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | find posterior of z given x  | sensory data  | state of the world  | parameterizes generative model from z to x | parameterizes approximate posterior |
+
 
 [^2]: Normalizing flows..
 
 [^3]: Why not just evaluate the marginal density itself directly by Monte Carlo? If we can evaluate $p_\theta(x \mid z)$ easily, we can get an unbiased estimate of $p_\theta(x)$ by taking iid samples $z_1,\ldots, z_n$ from $N(0,I)$, and calculating $\sum_{i = 1}^n p_\theta(x \mid z_i)$. Unfortunately this may be too high variance. Consider image data—almost no latent variables $z$ will generate anything close to a given image $x$, so for every $x$ $p_\theta(x \mid z_i)$ will be close to zero with extremely high probability. ELBO avoids this, by averaging over the conditional distribution $q_\phi(z \mid x)$. This concentrates probability mass on $z$'s which are likely to have generated $x$, so we won't be averaging over a bunch of terms almost all of which are zero.
+
 
 
 ## Applications
@@ -112,7 +128,7 @@ $$
 
 The normalizing constant $Q$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$.[^4] Energy in any given system state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$. The partition function plays a critical role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods, and the negative ELBO is the called the variational free energy. As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
+This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$. Note for this application there are no $x$'s. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods, and the negative ELBO is the called the variational free energy. As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
 
 See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on the equivalence between the ELBO and variational methods in physics.
 
@@ -123,14 +139,9 @@ See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_9
 Variational methods appear to becoming more common in biology. One nice application is ["Deep generative modeling for single-cell transcriptomics"](https://www.nature.com/articles/s41592-018-0229-2). Here the data $x$ describes, for each cell, the degree to which it expresses one of many genes. The $z$ is the latent structure, which is much lower-dimensional than the number of genes: a cell is a 10-dimensional vector in latent space, but expresses 100s - 10,000s genes in these datasets. The modeling is similar to the variational autoencoder network example above, except the likelihood $p_\theta(x \mid z)$ is zero-inflated negative binomial, to fit the count data. Learning the latent structure allows us cluster or classify cells. Especially intriguing is cell _generation_—we can use this model to generate new synthetic cells, just as a VAE trained on image data allows us to generate new images! 
 
 ### Neuroscience 
-#### Free-Energy Principle
+#### Free-Energy Model of the Brain
 An influential theory in neuroscience is Karl Friston's [Free-Energy Principle](https://www.nature.com/articles/nrn2787). It exemplifies the Bayesian brain hypothesis, which posits that the brain has a built-in generative model of the world which it uses to construct posterior beliefs. Friston's theory has the brain effectively performing variational inference to understand the world.
 
 Here the latent variables $z$ are physical events and features in the world, which then generate sensory input $x$  (e.g. light on the retina or cochlear vibration). The brain is assumed to have some understanding of the kinds of $z$ out in the world, and how they map to $x$—in other words, a generative model $p_\theta(x)$ and $p_\theta(z \mid x)$. We wish to form an accurate understanding of what's going on in the physical world given the sense data, i.e. an approximate posterior $q_\phi(z \mid x)$, called the "recognition density" here. The parameters $(\theta, \phi)$ correspond to synaptic strengths in the brain. 
 
 We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same.
-
-
-### Information Theory
-#### Iterative Decoding
-infomax principle? efficient coding?
