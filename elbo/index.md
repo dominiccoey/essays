@@ -54,7 +54,7 @@ But if we're interested in evaluating the marginal likelihood $p_\theta(x)$, why
 ## Why is it important?
 The answer is that the marginal likelihood not be feasible to compute, and **ELBO helps us approximately evaluate and maximize intractable marginal likelihood functions.** As additional benefits, by maximizing ELBO we'll also obtain a conditional distribution $q_\phi(z \mid x)$ which approximates the true conditional distribution $p_{\theta_0}(z \mid x)$, and (for an appropriately chosen latent variable structure) we'll be able to easily draw iid samples of new data similar to the training data $x$. This former point is important in Bayesian statistics, where $Z$'s are the parameters so these conditional distributions are in fact our posteriors given the data. The latter point is important in generative AI, where we want to generate new images similar to the training images.
 
-## How does it work?
+## Why does it help?
 Let's assume our data is sufficiently complicated that it's hard to write down a reasonable parametric statistical model for it with a density $p_\theta(x)$ that is easy to evaluate.[^2] How can we fit this model to the data (in the sense of maximizing the likelihood), if it's prohibitively expensive to even evaluate the density?
 
 Here's where ELBO helps. If 
