@@ -81,7 +81,7 @@ MCMC methods allow us, at least in the limit, to draw exact samples from the pos
 An example of such a restriction when $z$ is vector-valued is that $Q$ is a _mean-field_ family. Write $z = (z^{(1)},\ldots,z^{(k)})$. Then the mean-field assumption is just that the components are independent, and $q$ factors as $q(z \mid x) = \prod_{i = 1}^k q_i( z_i \mid x)$.
 
 #### Empirical Bayes Hyperparameter Selection
-In empirical Bayes, as in variational Bayes, the $z$ are parameters of interest. Unlike in variational Bayes, we _do_ have some unknown hyperparameters in the density $p_\theta(x, z)$. The classic approach would be to choose them by maximizing the marginal likelihood. And if that's hard to compute? Maximizing ELBO is a natural alternative! The argument is that if we choose a rich enough posterior family, we'll get close to the true posterior, and maximizing ELBO will be close to maximizing the marginal likelihood.
+In empirical Bayes, as in variational Bayes, the $z$ are parameters of interest. Unlike in variational Bayes, we _do_ have some unknown hyperparameters in the density $p_\theta(x, z)$. The classic approach would be to choose them by maximizing the marginal likelihood. And if that's hard to compute? Maximizing ELBO is a natural alternative. The argument is that if we choose a rich enough posterior family, we'll get close to the true posterior, and maximizing ELBO will be close to maximizing the marginal likelihood.
 
 ### Machine Learning
 #### Variational Autoencoders
@@ -120,7 +120,7 @@ See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_9
 
 ### Computational Biology
 #### Modeling Single-cell Gene Expression
-Variational methods appear to becoming more common in biology. One nice application is ["Deep generative modeling for single-cell transcriptomics"](https://www.nature.com/articles/s41592-018-0229-2). Here the data $x$ describes, for each cell, the degree to which it expresses one of many genes. The $z$ is the latent structure, which is much lower-dimensional than the number of genes: a cell is a 10-dimensional vector in latent space, but expresses 100s - 10,000s genes in these datasets. The modeling is similar to the variational autoencoder network example above, except the likelihood $p_\theta(x \mid z)$ is zero-inflated negative binomial, to fit the count data. Learning the latent structure allows us cluster or classify cells. Especially intriguing though is cell _generation_—we can use this model to generate new synthetic cells, just as a VAE trained on image data allows us to generate new images! 
+Variational methods appear to becoming more common in biology. One nice application is ["Deep generative modeling for single-cell transcriptomics"](https://www.nature.com/articles/s41592-018-0229-2). Here the data $x$ describes, for each cell, the degree to which it expresses one of many genes. The $z$ is the latent structure, which is much lower-dimensional than the number of genes: a cell is a 10-dimensional vector in latent space, but expresses 100s - 10,000s genes in these datasets. The modeling is similar to the variational autoencoder network example above, except the likelihood $p_\theta(x \mid z)$ is zero-inflated negative binomial, to fit the count data. Learning the latent structure allows us cluster or classify cells. Especially intriguing is cell _generation_—we can use this model to generate new synthetic cells, just as a VAE trained on image data allows us to generate new images! 
 
 ### Neuroscience 
 #### Free-Energy Principle
