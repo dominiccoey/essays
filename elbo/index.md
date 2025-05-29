@@ -74,7 +74,17 @@ $$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{
 This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
 
 #### Variational Bayes
-ELBO provides an alternative to finding the posterior by MCMC. Here the latent variables $Z$ are the unknown parameters we wish to perform inference on, and $q_\phi(z \mid x)$ is called the **variational  distribution**. In addition to fitting an approximate posterior $q_\phi(z \mid x)$, we get the marginal likelihood $p_\theta (x)$. Comparing the marginal likelihoods across different models is often used for [Bayesian model selection](https://en.wikipedia.org/wiki/Bayes_factor).
+ELBO provides an alternative to finding the posterior by MCMC. The latent variables $Z$ are the unknown parameters we wish to perform inference on. The distribution $p(x,z)$ is _not_ parameterized by some unknown $\theta$ we're trying to estimate—in a fully Bayesian model, we specify the prior over all unknown parameters $p(z)$, as well as the likelihood $p(x \mid z)$. We'd like to know the posterior $p(z \mid x)$. What are our options?
+
+MCMC methods allow us, at least in the limit, to draw exact samples from the posterior. But they may be quite computationally intensive. Variational methods deliver an approximate posterior, typically at much less computational cost. They work as follows: we specify some family of approximating posteriors $q( z \mid x)$ where $q$ belongs to some family of densities $Q$, and we maximize the ELBO with respect to $q \in Q$. We don't want $Q$  be the set of all possible densities over $z$, because this would be equivalent to finding the true posterior, and we wouldn't have simplified the problem. Instead we optimize over some restricted class of densities. 
+
+An example of such a restriction when $z$ is vector-valued is that $Q$ is a _mean-field_ family. Write $z = (z^{(1)},\ldots,z^{(k)})$. Then the mean-field assumption is just that the components are independent, and $q$ factors as $q(z \mid x) = \prod_{i = 1}^k q_i( z_i \mid x)$.
+
+
+#### Empirical Bayes
+[[Maximizing the marginal likelihood]] "The premise is that the bound is a good approximation of the marginal likelihood,
+which provides a basis for selecting a model. Though this sometimes works in practice, selecting based on a bound is not justified in theory"
+
 
 
 ### Machine Learning
@@ -106,7 +116,7 @@ $$
 
 The normalizing constant $Q$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$.[^4] Energy in any given system state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$. The partition function plays a critical role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods, and the negative ELBO is the called the variational free energy. If $z$ is vector-valued, for example, we may make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
+This is where ELBO comes in. We write the log joint density of the ELBO as $\log p(x,z) = -E(z)$, where we consider the $x$'s to be fixed system parameters rather than a random variable. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods, and the negative ELBO is the called the variational free energy. As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
 
 See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on the equivalence between the ELBO and variational methods in physics.
 
