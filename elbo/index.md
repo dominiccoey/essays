@@ -34,7 +34,7 @@ L(\phi, \theta; x)
 \end{align*}
 $$
 
-Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the log "evidence", $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
+Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always non-negative, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the log "evidence", $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
 
 
 **Reconstruction plus regularization.** Equivalently we can write
@@ -70,7 +70,7 @@ Below are some methodological and empirical applications of the general idea of 
 | [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | approximate the posterior $z \mid x$ | depends on use-case | parameters of interest | none | describes the nonparametric approximate posterior | 
 | [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters $\theta$ | depends on use-case  | parameters of interest | hyperparameters of joint distribution of $(x,z)$  | parameterizes approximating posterior |
 | [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | depends on use-case, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
-| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | depends on use-case, often images |  lower-dimensional input representation | parameterizes decoder neural network | none, encoder known |
+| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | depends on use-case, often images |  sequence of increasingly noisy versions of $x$ | parameterizes decoder neural network | none, encoder known |
 | [_Variational statistical mechanics_](https://en.wikipedia.org/wiki/Helmholtz_free_energy)  | approximate the partition function | none | physical states | none | describes the nonparametric approximate state distribution |
 | [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | approximate the posterior $z \mid x$  | cell-level gene expression  | lower-dimensional cell representation | parameterizes distribution of $x \mid z$ | parameterizes approximate posterior |
 | [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | approximate the posterior $z \mid x$  | sensory data  | state of the world  | parameterizes distribution of $x \mid z$ | parameterizes approximate posterior |
@@ -89,14 +89,14 @@ What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxil
 
 $$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
 
-This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
+This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed. The latter step boils down to to directly calculating the conditional distribution $p_\theta(z \mid x)$.
 
 #### Variational Bayes
 ELBO provides an alternative to finding the posterior by MCMC. The latent variables $z$ are the unknown parameters of interest. The distribution $p(x,z)$ is _not_ parameterized by some unknown $\theta$ we're trying to estimate—in a fully Bayesian model, we specify the prior over all unknown parameters $p(z)$, as well as the likelihood $p(x \mid z)$. We'd like to know the posterior $p(z \mid x)$. What are our options?
 
 MCMC methods allow us, at least in the limit, to draw exact samples from the posterior. But they may be quite computationally intensive. Variational methods deliver an approximate posterior, typically at much less computational cost. They work as follows: we specify approximating posteriors $q( z \mid x)$ where $q$ belongs to some family of densities $Q$, and we maximize the ELBO with respect to $q \in Q$. We _don't_ want $Q$  be the set of all possible densities over $z. This would be equivalent to finding the true posterior, and we wouldn't have simplified the problem. Instead we optimize over some restricted class of densities. 
 
-An example of such a restriction when $z$ is vector-valued is that $Q$ is a _mean-field_ family. Write $z = (z^{(1)},\ldots,z^{(k)})$. Then the mean-field assumption is just that the components are independent, and $q$ factors as $q(z \mid x) = \prod_{i = 1}^k q_i( z_i \mid x)$. [This paper](https://arxiv.org/pdf/1601.00670) is an excellent introduction to these ideas.
+An example of such a restriction when $z$ is vector-valued is that $Q$ is a _mean-field_ family. Write $z = (z^{(1)},\ldots,z^{(k)})$. Then the mean-field assumption is just that the components are independent, and $q$ factors as $q(z \mid x) = \prod_{i = 1}^k q_i( z^{(i)} \mid x)$. [This paper](https://arxiv.org/pdf/1601.00670) is an excellent introduction to these ideas.
 
 #### Empirical Bayes Hyperparameter Selection
 In empirical Bayes, as in variational Bayes, the $z$ are parameters of interest. Unlike in variational Bayes, we _do_ have some unknown hyperparameters in the density $p_\theta(x, z)$. The classic approach would be to choose them by maximizing the marginal likelihood. And if that's hard to compute? Maximizing ELBO is a natural alternative. The argument is that if we choose a rich enough posterior family, we'll get close to the true posterior, and maximizing ELBO will be close to maximizing the marginal likelihood.
@@ -104,7 +104,7 @@ In empirical Bayes, as in variational Bayes, the $z$ are parameters of interest.
 ### Machine Learning
 #### Variational Autoencoders
 In a variational autoencoder (VAE) we specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
-- **Encoder**, $x \to z$: We model $q_\phi(z \mid x)$ as $N(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. 
+- **Encoder**, $x \to z$: We model $q_\phi(z \mid x)$ as $N(m(x;\phi), V(x;\phi))$ for some neural networks $m,V$ for the conditional mean and variance. 
 - **Decoder**, $z \to x$: The latent variable $z$ is $N(0,I)$, and $x \mid z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
 
 This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) \\ dz$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p(z)$. Because $z$ is $N(0,I)$, it is not parameterized by $\theta$.
