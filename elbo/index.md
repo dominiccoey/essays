@@ -146,5 +146,5 @@ An influential theory in neuroscience is Karl Friston's [Free-Energy Principle](
 
 Here the latent variables $z$ are physical events and features in the world, which then generate sensory input $x$  (e.g. light on the retina or cochlear vibration). The brain is assumed to have some understanding of the kinds of $z$ out in the world, and how they map to $x$—in other words, a generative model $p(z)$ and $p_\theta(x \mid z)$. We wish to form an accurate understanding of what's going on in the physical world given the sense data, i.e. an approximate posterior $q_\phi(z \mid x)$, called the "recognition density" here. The parameters $(\theta, \phi)$ correspond to synaptic strengths in the brain. 
 
-We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same.
+We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same. This is all very interesting, although given the level of abstraction it's unclear to me what this buys us in terms of explanatory power, or falsifiable predictions.
 
