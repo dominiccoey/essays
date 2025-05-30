@@ -86,16 +86,16 @@ Below are some methodological and empirical applications of the general idea of 
 ## Applications
 ### Statistics
 #### The EM algorithm
-What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This effectively reduces to the EM algorithm, which iteratively computes 
+What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxilary model $q_\phi(z \mid x)$? This kind of situation, where it's easy to evaluate $p\theta(x,z)$ and $p_\theta(z \mid x)$ but not $p_\theta(x)$, arises in e.g. [Gaussian mixture models](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm#Gaussian_mixture). In this case ELBO maximization effectively reduces to the EM algorithm, which iteratively computes 
 
 $$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
 
 This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed.
 
 #### Variational Bayes
-ELBO provides an alternative to finding the posterior by MCMC. The latent variables $z$ are the unknown parameters we wish to perform inference on. The distribution $p(x,z)$ is _not_ parameterized by some unknown $\theta$ we're trying to estimate—in a fully Bayesian model, we specify the prior over all unknown parameters $p(z)$, as well as the likelihood $p(x \mid z)$. We'd like to know the posterior $p(z \mid x)$. What are our options?
+ELBO provides an alternative to finding the posterior by MCMC. The latent variables $z$ are the unknown parameters of interest. The distribution $p(x,z)$ is _not_ parameterized by some unknown $\theta$ we're trying to estimate—in a fully Bayesian model, we specify the prior over all unknown parameters $p(z)$, as well as the likelihood $p(x \mid z)$. We'd like to know the posterior $p(z \mid x)$. What are our options?
 
-MCMC methods allow us, at least in the limit, to draw exact samples from the posterior. But they may be quite computationally intensive. Variational methods deliver an approximate posterior, typically at much less computational cost. They work as follows: we specify some family of approximating posteriors $q( z \mid x)$ where $q$ belongs to some family of densities $Q$, and we maximize the ELBO with respect to $q \in Q$. We don't want $Q$  be the set of all possible densities over $z$, because this would be equivalent to finding the true posterior, and we wouldn't have simplified the problem. Instead we optimize over some restricted class of densities. 
+MCMC methods allow us, at least in the limit, to draw exact samples from the posterior. But they may be quite computationally intensive. Variational methods deliver an approximate posterior, typically at much less computational cost. They work as follows: we specify approximating posteriors $q( z \mid x)$ where $q$ belongs to some family of densities $Q$, and we maximize the ELBO with respect to $q \in Q$. We _don't_ want $Q$  be the set of all possible densities over $z. This would be equivalent to finding the true posterior, and we wouldn't have simplified the problem. Instead we optimize over some restricted class of densities. 
 
 An example of such a restriction when $z$ is vector-valued is that $Q$ is a _mean-field_ family. Write $z = (z^{(1)},\ldots,z^{(k)})$. Then the mean-field assumption is just that the components are independent, and $q$ factors as $q(z \mid x) = \prod_{i = 1}^k q_i( z_i \mid x)$. [This paper](https://arxiv.org/pdf/1601.00670) is an excellent introduction to these ideas.
 
@@ -108,7 +108,7 @@ In a variational autoencoder (VAE) we specify an encoder (which turns the data $
 - **Encoder**, $x \to z$: The latent variable $z$ is $N(0,I)$, and $x \mid z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
 - **Decoder**, $z \to x$: We model $q_\phi(z \mid x)$ as $N(m(x;\theta), V(x;\theta))$ for some neural networks $m,V$ for the conditional mean and variance. 
 
-This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) \\ dz$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p_\theta(z)$.
+This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) \\ dz$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p(z)$.
 
 Because of the latent variable structure we can easily generate new samples from the model we fit—simply draw $z$ from $N(0,I)$, and then $x \mid z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$. 
 
