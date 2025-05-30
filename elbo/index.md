@@ -9,6 +9,10 @@ The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (
 
 This note explains the ELBO and how it applies, in a [somewhat eclectic selection of examples](#what-does-this-look-like-in-practice) from statistics, machine learning, statistical physics, computational biology, and neuroscience.
 
+## Problem statement
+
+---
+
 ## What is it?
 **Basic setup.** We have observed random variables $x$ and latent random variables $z$. We have a statistical model $p_\theta(x,z)$, and $(x,z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$.[^1] We specify an additional model for the conditional distribution, $q_\phi(z \mid x)$. This will be used to approximate the true conditional $p_{\theta_0}(z \mid x)$.
 
