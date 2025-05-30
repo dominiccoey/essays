@@ -82,7 +82,7 @@ Below are some methodological and empirical applications of the general idea of 
 
 
 
-## ELBOs Everywhere!
+## ELBOs everywhere!
 ### Statistics
 #### The EM algorithm
 What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxiliary model $q_\phi(z \mid x)$? This kind of situation, where it's easy to evaluate $p\theta(x,z)$ and $p_\theta(z \mid x)$ but not $p_\theta(x)$, arises in e.g. [Gaussian mixture models](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm#Gaussian_mixture). In this case ELBO maximization effectively reduces to the EM algorithm, which iteratively computes 
