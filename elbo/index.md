@@ -3,7 +3,7 @@ layout: page
 title: "All hail the ELBO: Why you should care about the evidence lower bound"
 permalink: /elbo/
 ---
-#### May 23, 2025
+#### May 30, 2025
 
 The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (ELBO) comes up in a broad range of technical fields. Like entropy or convolutions or Markov processes or convex duality, it's a highly leveraged concept. If you understand it, you have insights into many different areas more or less for free—it's just a matter of understanding how the components of the ELBO map to the particular application at hand. Remarkably, diffusion models in generative AI, variational statistical mechanics, and the free-energy model of the brain all share a common mathematical structure. 
 
