@@ -62,7 +62,7 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 - _Surrogate objective_: The ELBO is often a reasonable surrogate. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. If we choose a rich class of approximating posteriors $q_\phi(z \mid x)$, the KL divergence term will tend to be small, and maximizing ELBO approximately maximizes the marginal likelihood.
 
 ## What does this look like in practice?
-Below are some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further. This is rather compact, and each of these applications is described in more detail [in the section below](#applications).
+Below are some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further. This is rather compact, and each of these applications is described in more detail [in the section below](#elbos-everywhere).
 
 |  Application | Goal |  $x$  | $z$ | $\theta$ | $\phi$
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
@@ -82,7 +82,7 @@ Below are some methodological and empirical applications of the general idea of 
 
 
 
-## Applications
+## ELBOs Everywhere!
 ### Statistics
 #### The EM algorithm
 What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxiliary model $q_\phi(z \mid x)$? This kind of situation, where it's easy to evaluate $p\theta(x,z)$ and $p_\theta(z \mid x)$ but not $p_\theta(x)$, arises in e.g. [Gaussian mixture models](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm#Gaussian_mixture). In this case ELBO maximization effectively reduces to the EM algorithm, which iteratively computes 
@@ -148,5 +148,3 @@ Here the latent variables $z$ are physical events and features in the world, whi
 
 We have all the elements necessary to apply variational inference. Instead of maximizing the ELBO, we talk of "minimizing free energy" or "minimizing surprise", although this is just a point of terminology—the mathematics is the same.
 
-## ELBOs everywhere! 
-Other important applications of ELBOs include [uncertainty quantification in neural networks](https://proceedings.mlr.press/v48/gal16.pdf) and learning [sparse Gaussian processes](https://proceedings.mlr.press/v5/titsias09a.html?utm_source=chatgpt.com). It's a surprisingly versatile modeling approach.
