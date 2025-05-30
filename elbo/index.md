@@ -68,13 +68,13 @@ Below are some methodological and empirical applications of the general idea of 
 |  application | goal |  $x$  | $z$ | $\theta$ | $\phi$
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
 | [_EM algorithm_](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)    | estimate parameters $\theta$ | depends on use-case  | depends on use-case   | parameterizes joint distribution of $(x,z)$ | same as $\theta$; posterior $z \mid x$ is known exactly |
-| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | obtain posterior over $z$ | depends on use-case | parameters of interest | none | describes the nonparametric approximate posterior | 
+| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | approximate the posterior $z \mid x$ | depends on use-case | parameters of interest | none | describes the nonparametric approximate posterior | 
 | [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters $\theta$ | depends on use-case  | parameters of interest | hyperparameters of joint distribution of $(x,z)$  | parameterizes approximating posterior |
 | [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | depends on use-case, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
 | [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | depends on use-case, often images |  lower-dimensional input representation | none, decoder known | parameterizes encoder neural network |
 | [_Variational statistical mechanics_](https://en.wikipedia.org/wiki/Helmholtz_free_energy)  | approximate the partition function | none | physical states | none | describes the nonparametric approximate state distribution |
-| [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | find posterior $z \mid x$  | cell-level gene expression  | lower-dimensional cell representation | parameterizes generative model of $z$, $x \mid z$ | parameterizes approximate posterior |
-| [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | find posterior of $z \mid x$  | sensory data  | state of the world  | parameterizes generative model of $z$, $x \mid z$ | parameterizes approximate posterior |
+| [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | approximate the posterior $z \mid x$  | cell-level gene expression  | lower-dimensional cell representation | parameterizes distribution of $x \mid z$ | parameterizes approximate posterior |
+| [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | approximate the posterior $z \mid x$  | sensory data  | state of the world  | parameterizes distribution of $x \mid z$ | parameterizes approximate posterior |
 
 
 [^2]: [Normalizing flows](https://en.wikipedia.org/wiki/Flow-based_generative_model) are a different approach, which doesn't compromise on exact likelihood evaluation. They seek to specify a class of distributions such that this is still possible, but which is large and flexible enough to model the data well.
