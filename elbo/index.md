@@ -13,7 +13,7 @@ This note explains the ELBO and how it applies, in a [somewhat eclectic selectio
 We have observed random variables $x$ and latent random variables $z$. We have a statistical model $p_\theta(x,z)$, and $(x,z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We want to calculate the marginal likelihood $p_\theta(x) = \int p_\theta(x,z) \\ dz$ or the conditional distribution $p_\theta(z \mid x) = \frac{p_\theta(x,z)}{\int p_\theta(x,z) \\ dz} $, or both. Why we might want to do this will become clear in the applications below. But evaluating the integral $\int p_\theta(x,z) \\ dz$ may be very expensive. How can we quickly approximate these quantites, instead of slowly computing them exactly?
 
 ## What is the ELBO?
-We specify an additional model for the conditional distribution, $q_\phi(z \mid x)$. This will be used to approximate the true conditional $p_{\theta_0}(z \mid x)$.
+Let's specify an additional model for the conditional distribution, $q_\phi(z \mid x)$, which will be used to approximate the true conditional $p_{\theta_0}(z \mid x)$.
 
 **Definition.** The _evidence lower bound_, $L(\phi, \theta; x)$, is
 
@@ -63,15 +63,15 @@ then we can use the ELBO in place of the marginal likelihood as an easier to eva
 - _Surrogate objective_: The ELBO is often a reasonable surrogate. Recall $L(\phi, \theta; x) = \ln p_\theta(x) - D_{KL}(q_\phi(z \mid x) \parallel p_\theta(z \mid x))$. If we choose a rich class of approximating posteriors $q_\phi(z \mid x)$, the KL divergence term will tend to be small, and maximizing ELBO approximately maximizes the marginal likelihood.
 
 ## What does this look like in practice?
-Below are some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further. This is rather compact, so each of these applications is described in more detail [in the section below](#applications).
+Below are some methodological and empirical applications of the general idea of ELBO maximization. It's far from comprehensive or representative (I'm omitting the [famous LDA paper](https://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)), but should give a sense of how to take the basic ideas above further. This is rather compact, and each of these applications is described in more detail [in the section below](#applications).
 
 |  application | goal |  $x$  | $z$ | $\theta$ | $\phi$
 | ----------- | ----------- | ----------- | ----------- | ----------- | ----------- |
-| [_EM algorithm_](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)    | estimate parameters $\theta$ | depends  | depends   | parameterizes joint distribution of $(x,z)$ | same as $\theta$; posterior $z \mid x$ is known exactly |
-| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | obtain posterior over $z$ | depends | parameters of interest | none | describes the nonparametric approximate posterior | 
-| [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters $\theta$ | depends  | parameters of interest | hyperparameters of joint distribution of $(x,z)$  | parameterizes approximating posterior |
-| [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | depends, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
-| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | depends, often images |  lower-dimensional input representation | none, decoder known | parameterizes encoder neural network |
+| [_EM algorithm_](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm)    | estimate parameters $\theta$ | depends on use-case  | depends on use-case   | parameterizes joint distribution of $(x,z)$ | same as $\theta$; posterior $z \mid x$ is known exactly |
+| [_Variational Bayes_](https://en.wikipedia.org/wiki/Variational_Bayesian_methods) | obtain posterior over $z$ | depends on use-case | parameters of interest | none | describes the nonparametric approximate posterior | 
+| [_Empirical Bayes_](https://en.wikipedia.org/wiki/Empirical_Bayes_method)  | estimate hyperparameters $\theta$ | depends on use-case  | parameters of interest | hyperparameters of joint distribution of $(x,z)$  | parameterizes approximating posterior |
+| [_VAEs_](https://en.wikipedia.org/wiki/Variational_autoencoder) | create a generative model of the input data | depends on use-case, often images |  lower-dimensional input representation | parameterizes decoder neural network | parameterizes encoder neural network |
+| [_Diffusion models_](https://en.wikipedia.org/wiki/Diffusion_model) | create a generative model of the input data | depends on use-case, often images |  lower-dimensional input representation | none, decoder known | parameterizes encoder neural network |
 | [_Variational statistical mechanics_](https://en.wikipedia.org/wiki/Helmholtz_free_energy)  | approximate the partition function | none | physical states | none | describes the nonparametric approximate state distribution |
 | [_Single-cell gene expression_](https://www.nature.com/articles/s41592-018-0229-2)  | find posterior $z \mid x$  | cell-level gene expression  | lower-dimensional cell representation | parameterizes generative model of $z$, $x \mid z$ | parameterizes approximate posterior |
 | [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | find posterior of $z \mid x$  | sensory data  | state of the world  | parameterizes generative model of $z$, $x \mid z$ | parameterizes approximate posterior |
