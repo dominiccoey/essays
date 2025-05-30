@@ -34,7 +34,7 @@ L(\phi, \theta; x)
 \end{align*}
 $$
 
-Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always non-negative, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the log "evidence", $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
+Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always non-negative, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the log evidence, $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
 
 
 **Reconstruction plus regularization.** Equivalently we can write
@@ -105,7 +105,7 @@ In empirical Bayes, as in variational Bayes, the $z$ are parameters of interest.
 #### Variational Autoencoders
 In a variational autoencoder (VAE) we specify an encoder (which turns the data $x$ into a latent variable $z$) and a decoder (the reverse operation), each of which have unknown parameters we estimate by maximizing the ELBO. 
 - **Encoder**, $x \to z$: We model $q_\phi(z \mid x)$ as $N(m(x;\phi), V(x;\phi))$ for some neural networks $m,V$ for the conditional mean and variance. 
-- **Decoder**, $z \to x$: The latent variable $z$ is $N(0,I)$, and $x \mid z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
+- **Decoder**, $z \to x$: The latent variable $z$ is $N(0,I)$ distributed, and $x \mid z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
 
 This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) \\ dz$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p(z)$. Because $z$ is $N(0,I)$, it is not parameterized by $\theta$.
 
@@ -122,15 +122,15 @@ As with VAEs, generating new samples is easy once the decoder is learned, as we 
 
 ### Statistical Physics
 #### Variational Statistical Mechanics
-[Some physical systems](https://en.wikipedia.org/wiki/Canonical_ensemble) are well described by the [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution), which specifies the probability of a state $i \in \\{1,\ldots,M\\}$ as
+[Some physical systems](https://en.wikipedia.org/wiki/Canonical_ensemble) are well described by the [Boltzmann distribution](https://en.wikipedia.org/wiki/Boltzmann_distribution), which specifies the probability of a state $z_i$ for $i \in \\{1,\ldots,M\\}$ as
 
 $$
 p_i=\frac{1}{Z} \exp\left(-  \varepsilon_i \right)  = \frac{ \exp\left(-  \varepsilon_i \right) }{ \displaystyle \sum_{j=1}^{M} \exp\left(- \varepsilon_j \right) }.
 $$
 
-The normalizing constant $Z$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $i$.[^4] Energy in any given state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$. The partition function plays a critical role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
+The normalizing constant $Z$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $z_i$.[^4] Energy in any given state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$. The partition function plays a critical role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-This is where ELBO comes in. We write the log joint "density" of the ELBO as $\log p(x,z) = -E(z)$. Note for this application there are no $x$'s. Then the "marginal likelihood", obtained from summing over states $z$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods. The negative ELBO is the called the variational free energy, and the negative log partition function is called the Helmholtz free energy.  As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
+This is where ELBO comes in. We write the log joint "density" of the ELBO as $\log p(x,z) = -E(z)$. Note for this application there are no $x$'s. Then the "marginal likelihood", obtained from summing over states $z_i$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods. The negative ELBO is the called the variational free energy, and the negative log partition function is called the Helmholtz free energy.  As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
 
 See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on the equivalence between the ELBO and variational methods in physics.
 
