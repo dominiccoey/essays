@@ -34,7 +34,7 @@ L(\phi, \theta; x)
 \end{align*}
 $$
 
-Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the "evidence", $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
+Because [KL divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence) is always positive, the ELBO $L(\phi, \theta; x)$ is indeed a lower bound on the log "evidence", $\ln p_\theta(x)$.[^1] Maximizing the ELBO with respect to $(\phi, \theta)$ encourages both a large marginal likelihood $p_\theta(x)$ and conditional distributions $q_\phi(z \mid x), p_\theta(z \mid x)$ which are close to each other.
 
 
 **Reconstruction plus consistency.** Equivalently we can write
@@ -49,8 +49,7 @@ $$
 
 Let's again consider what happens when we maximize the ELBO over $(\phi, \theta)$. The first term on the RHS—the _reconstruction_ term—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term—the _consistency_ term—acts as a regularizer, and rewards a $q_\phi(z \mid x)$ which is close to the prior $p_\theta(z)$, and in particular does not vary wildly with $x$.
 
-[^1]: Alternatively if the true distribution is not in the model class, we can think of $\theta_0$ as being the closest distribution in the model class to the truth, in the sense of minimizing KL-divergence.
-[^1]: Why is $\ln p_\theta(x)$ called the evidence?
+[^1]: Why is $p_\theta(x)$ called the evidence? For Bayesian model selection, we often compare the ratio of marginal likelihoods under different models (the [Bayes factor](https://en.wikipedia.org/wiki/Bayes_factor)). In this sense, marginal likelihood is a measure of the strength of support in the data for a particular model.
 
 ## How does it help?
 **ELBO helps us approximately evaluate and maximize intractable marginal likelihood functions.** How? Let's assume our data is sufficiently complicated that it's hard to write down a reasonable statistical model for it with a marginal likelihood $p_\theta(x)$ that is easy to evaluate.[^2] Then if 
