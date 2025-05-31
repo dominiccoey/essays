@@ -10,7 +10,7 @@ The [evidence lower bound](https://en.wikipedia.org/wiki/Evidence_lower_bound) (
 This note explains the ELBO and how it applies, in a [somewhat eclectic selection of examples](#what-does-this-look-like-in-practice) from statistics, machine learning, statistical physics, computational biology, and neuroscience.
 
 ## Problem statement
-We have observed random variables $x$ and latent random variables $z$. We have a statistical model $p_\theta(x,z)$, and $(x,z)$ are distributed according to $p_{\theta_0}(x,z)$, for some true value $\theta_0$. We want to calculate the marginal likelihood $p_\theta(x) = \int p_\theta(x,z) \\ dz$ or the conditional distribution $p_\theta(z \mid x) = \frac{p_\theta(x,z)}{\int p_\theta(x,z) \\ dz} $, or both. Why we might want to do this will become clear in the applications below. But evaluating the integral $\int p_\theta(x,z) \\ dz$ may be very expensive. How can we quickly approximate these quantities, instead of slowly computing them exactly?
+We have observed random variables $x$ and latent random variables $z$. We have a statistical model $p_\theta(x,z)$, and $(x,z)$ are distributed according to $p_{\theta_0}(x,z)$, for some unknown true value $\theta_0$. We want to calculate the marginal likelihood $p_\theta(x) = \int p_\theta(x,z) \\ dz$ or the conditional distribution $p_\theta(z \mid x) = \frac{p_\theta(x,z)}{\int p_\theta(x,z) \\ dz} $, or both. Why we might want to do this will become clear in the applications below. But evaluating the integral $\int p_\theta(x,z) \\ dz$ may be very expensive. How can we quickly approximate these quantities, instead of slowly computing them exactly?
 
 ## What is the ELBO?
 Let's specify an additional model for the conditional distribution, $q_\phi(z \mid x)$, which will be used to approximate the true conditional $p_{\theta_0}(z \mid x)$.
@@ -49,7 +49,7 @@ $$
 
 Let's again consider what happens when we maximize the ELBO over $(\phi, \theta)$. The first term on the RHS—the _reconstruction_ term—encourages the model to learn a $q_\phi(z \mid x)$ and a $p_\theta(x\mid z)$ so that the latent $z$ capture enough information about $x$ to allow $p_\theta(x\mid z)$ to generate something very similar to $x$. The second term—the _regularization_ term—rewards a $q_\phi(z \mid x)$ which is close to the prior $p_\theta(z)$, and in particular does not vary wildly with $x$.
 
-[^1]: Why is $p_\theta(x)$ called the evidence? For Bayesian model selection, we often compare the ratio of marginal likelihoods under different models (the [Bayes factor](https://en.wikipedia.org/wiki/Bayes_factor)). In this sense, marginal likelihood is a measure of the strength of support in the data for a particular model.
+[^1]: Why is $p_\theta(x)$ called the evidence? In Bayesian model comparison, the marginal likelihood $p_\theta(x)$ quantifies how much the data support a model. The [Bayes factor](https://en.wikipedia.org/wiki/Bayes_factor) is the ratio of two such evidence terms for two different models.
 
 ## How does it help?
 **The ELBO lets us replace an intractable marginal likelihood with a tractable surrogate.** How? Let's assume our data is sufficiently complicated that it's hard to write down a reasonable statistical model for it with a marginal likelihood $p_\theta(x)$ that is easy to evaluate.[^2] If 
@@ -76,7 +76,7 @@ Below are some methodological and empirical applications of the general idea of 
 | [_Free-energy theory of the brain_](https://www.nature.com/articles/nrn2787)  | approximate the posterior $z \mid x$  | sensory data  | state of the world  | parameterizes distribution of $x \mid z$ | parameterizes approximate posterior |
 
 
-[^2]: [Normalizing flows](https://en.wikipedia.org/wiki/Flow-based_generative_model) are a different approach, which doesn't compromise on exact likelihood evaluation. They seek to specify a class of distributions such that this is still possible, but which is large and flexible enough to model the data well.
+[^2]: [Normalizing flows](https://en.wikipedia.org/wiki/Flow-based_generative_model) are a different approach, which retain exact likelihood evaluation. They seek to specify a class of distributions such that this is still possible, but which is large and flexible enough to model the data well.
 
 [^3]: Why not just evaluate the marginal density itself directly by Monte Carlo? If we can evaluate $p_\theta(x \mid z)$ easily, we can get an unbiased estimate of $p_\theta(x)$ by taking iid samples $z_1,\ldots, z_n$ from $p(z)$, and calculating $\tfrac{1}{n}\sum_{i = 1}^n p_\theta(x \mid z_i)$. Unfortunately this may be too high variance. Consider image data—almost no latent variables $z$ will generate anything close to a given image $x$, so for every $x$ $p_\theta(x \mid z_i)$ will be close to zero with extremely high probability. ELBO avoids this, by averaging over the conditional distribution $q_\phi(z \mid x)$. This concentrates probability mass on $z$ values most likely to have generated $x$, so we won't be averaging over a bunch of terms almost all of which are zero.
 
@@ -89,7 +89,7 @@ What if we can easily calculate $p_\theta(z \mid x)$, and we don't need an auxil
 
 $$\theta_{t+1} = \arg\max_{\theta} E_{z \sim p_{\theta_t}(\cdot \mid x)} \ln p_{\theta}(x, z).$$
 
-This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed. The latter step boils down to to directly calculating the conditional distribution $p_\theta(z \mid x)$.
+This procedure is identical to iteratively maximizing the ELBO with respect to $\theta$ with $\phi$ fixed, and with respect to $\phi$ with $\theta$ fixed. The latter step boils down to directly calculating the conditional distribution $p_\theta(z \mid x)$.
 
 #### Variational Bayes
 ELBO provides an alternative to finding the posterior by MCMC. The latent variables $z$ are the unknown parameters of interest. The distribution $p(x,z)$ is _not_ parameterized by some unknown $\theta$ we're trying to estimate—in a fully Bayesian model, we specify the prior over all unknown parameters $p(z)$, as well as the likelihood $p(x \mid z)$. We'd like to know the posterior $p(z \mid x)$. What are our options?
@@ -107,7 +107,7 @@ In a variational autoencoder (VAE) we specify an encoder (which turns the data $
 - **Encoder**, $x \to z$: We model $q_\phi(z \mid x)$ as $N(m(x;\phi), V(x;\phi))$ for some neural networks $m,V$ for the conditional mean and variance. 
 - **Decoder**, $z \to x$: The latent variable $z$ is $N(0,I)$ distributed, and $x \mid z$ is $N(\mu(z;\theta), \Sigma(z;\theta))$. The $\mu, \Sigma$ functions are neural networks, so this is a rich class of distributions which could adequately model, e.g., complex high-dimensional image data.
 
-This structure is well-suited to the ELBO approach. In general the marginal density $p_\theta(x) = \int p_\theta(x,z) \\ dz$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p(z)$. Because $z$ is $N(0,I)$, it is not parameterized by $\theta$.
+In general the marginal density $p_\theta(x) = \int p_\theta(x,z) \\ dz$ is expensive to evaluate accurately, but the joint density $p_\theta(x,z)$ is easy to evaluate, since it is the product of the normal densities $p_\theta(x \mid z)$, $p(z)$. Because $z$ is $N(0,I)$, it is not parameterized by $\theta$.
 
 Because of the latent variable structure we can easily generate new samples from the model we fit—simply draw $z$ from $N(0,I)$, and then $x \mid z$ from $N(\mu(z;\theta), \Sigma(z;\theta))$. 
 
@@ -130,7 +130,7 @@ $$
 
 The normalizing constant $Z$ is known as the "partition function", and $\varepsilon_i$ is the energy of state $z_i$.[^4] Energy in any given state $z_i$ is a known system-specific function $E$, called the Hamiltonian: $\varepsilon_i = E(z_i)$. The partition function plays a critical role in determining the physical behavior of the system, but may take impractically long to compute if the number of system states $M$ is enormous.
 
-This is where ELBO comes in. We write the log joint "density" of the ELBO as $\log p(x,z) = -E(z)$. Note for this application there are no $x$'s. Then the "marginal likelihood", obtained from summing over states $z_i$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods. The negative ELBO is the called the variational free energy, and the negative log partition function is called the Helmholtz free energy.  As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
+This is where ELBO comes in. The log unnormalized probability $-E(z)$ in this problem corresponds to the $\log p(x,z)$ in the ELBO. Note for this application there are no $x$'s. Then the "marginal likelihood", obtained from summing over states $z_i$, is exactly the partition function! With a tractable model $q(z)$ of the distribution of system states, we can find a lower bound on the log partition function by maximizing the ELBO. The optimization will often involve variational methods. The negative ELBO is the called the variational free energy, and the negative log partition function is called the Helmholtz free energy.  As in the [variational Bayes](#variational-bayes) case above, if $z$ is vector-valued, a common approach is to make $q$ tractable via the _mean-field_ assumption, according to which the component elements are independent. 
 
 See [here](https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_92.pdf) for more on the equivalence between the ELBO and variational methods in physics.
 
