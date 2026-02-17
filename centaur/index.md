@@ -17,7 +17,7 @@ Here’s a minimal framework for thinking about this. There are two tasks, _A_ (
     * the charisma, moral authority, trustworthiness, credibility, and communication skills to reduce organizational frictions and interpersonal misalignment.
     * Both are facets of leadership. Both are challenging for conventional educational institutions to certify or credential.
 3. Firms will be disadvantaged if they have large process and communication overhead, and fragmented, undifferentiated culture. This disproportionately affects large firms. Previously they may have been able to succeed because small firms could not produce enough of _A_ for a viable product. Now that advantage has disappeared.
-4. As the cost of _A_ drops to zero, the market becomes flooded high _A_, low _B_ products. We have a name for this: _slop_.
+4. As the cost of _A_ drops to zero, the market becomes flooded high _A_, low _B_ products. We have a name for this: _slop_. Its defining characteristic is fluency of form combined with lack of intent.
 5. Bottlenecks are endogenous. AI progress takes tasks in _B_ and puts then in _A_.
     * There will be large economic incentives to remove bottlenecks, one by one. Previously insignificant costs will become intolerable. If you spend 50% of your time programming (_A_) and 50% of your time on alignment and communications (_B_), halving the latter only increases output by one-third. If AI drives the time spent programming to zero, halving the time on _B_ doubles output.
     * This applies recursively, as more tasks are recategorized from _B_ to _A_. Costs which pre-AI would have been trivial nuisances become critical bottlenecks. Large rewards exist for those who can automate them. They fall one by one, until the end of the centaur age.
