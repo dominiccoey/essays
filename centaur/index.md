@@ -2,7 +2,7 @@
 
 From 2005 to around 2014, the best AI-assisted human chess players were better than the best AI and human players alone. More occupations are experiencing their own centaur age. What economic changes should we expect?
 
-Here’s a minimal framework for thinking about this. There are two tasks, _A_ (automatable tasks) and _B_ (bottleneck tasks). _A_ can be performed by AI, _B_ cannot. Output is Leontief, _Y_ = min(_A_, _B_). Some remarks following from this:
+Here’s a minimal framework for thinking about this. There are two tasks, _A_ (automatable tasks) and _B_ (bottleneck tasks). _A_ can be performed by AI, _B_ cannot. Output is Leontief, _Y_ = min(_A_, _B_). Some implications follow:
 
 * Two kinds of labor prosper. 
     * Those who use AI to produce huge amounts of _A_, e.g. delegating to swarms of coding agents.
