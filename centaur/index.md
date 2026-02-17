@@ -10,7 +10,7 @@ From 2005 to around 2014, the best AI-assisted human chess players were better t
 Here’s a minimal framework for thinking about this. There are two tasks, _A_ (automatable tasks) and _B_ (bottleneck tasks). _A_ can be performed by AI, _B_ cannot. Output is Leontief, _Y_ = min(_A_, _B_). Some implications follow:
 
 1. Two kinds of labor prosper. 
-    * Those who use AI to produce huge amounts of _A_, e.g. delegating to swarms of coding agents.
+    * Those who use AI to produce unprecedented amounts of _A_, e.g. delegating to swarms of coding agents.
     * Those who produce _B_.
 2. What is _B_? Everything which results in the firm being maximally focused on what the market rewards. There is much here. Important subcomponents are:
     * the taste and product sense to know what to produce,
