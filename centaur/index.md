@@ -7,7 +7,7 @@ Here’s a minimal framework for thinking about this. There are two tasks, _A_ (
 * Two kinds of labor prosper. 
     * Those who use AI to produce huge amounts of _A_, e.g. delegating to swarms of coding agents.
     * Those who produce _B_.
-* What is _B_? Everything which results in the firm’s efforts being maximally focused on what the market rewards. There is much here, but important subcomponents are:
+* What is _B_? Everything which results in the firm being maximally focused on what the market rewards. There is much here, but important subcomponents are:
     * the taste and product sense to know what to produce
     * the charisma, moral authority, trustworthiness, credibility, and communication skills to eliminate organizational frictions and interpersonal misalignment.
     * Both are facets of leadership. Both are challenging for conventional educational institutions to certify or credential.
