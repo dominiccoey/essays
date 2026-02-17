@@ -11,7 +11,7 @@ Here’s a minimal framework for thinking about this. There are two tasks, _A_ (
     * the taste and product sense to know what to produce
     * the charisma, moral authority, trustworthiness, credibility, and communication skills to eliminate organizational frictions and interpersonal misalignment.
     * Both are facets of leadership. Both are challenging for conventional educational institutions to certify or credential.
-* Firms will lose if they have large process and communication overhead, and fragmented, undifferentiated culture. This disproportionately describes large firms. Previously they might have been able to succeed because small firms simply could not produce enough of _A_ for a viable product. Now that advantage has disappeared.
+* Firms will be disadvantaged if they have large process and communication overhead, and fragmented, undifferentiated culture. This disproportionately describes large firms. Previously they might have been able to succeed because small firms simply could not produce enough of _A_ for a viable product. Now that advantage has disappeared.
 * As the cost of _A_ drops to zero, the market becomes flooded high _A_, low _B_ products. We call this slop.
 * Bottlenecks are endogenous. AI progress takes tasks in _B_ and puts then in _A_.
     * There will be unprecedented economic incentives to remove bottlenecks one by one. Previously insignificant costs will become intolerable. If you spend 50% of your time programming (_A_) and 50% of your time on alignment and communications (_B_), halving the latter only increases output by one-third. If AI drives the time spent programming to zero, halving the time on _B_ doubles output.
