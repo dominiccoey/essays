@@ -12,11 +12,11 @@ Here’s a minimal framework for thinking about this. There are two tasks, _A_ (
 1. Two kinds of labor prosper. 
     * Those who use AI to produce huge amounts of _A_, e.g. delegating to swarms of coding agents.
     * Those who produce _B_.
-2. What is _B_? Everything which results in the firm being maximally focused on what the market rewards. There is much here, but important subcomponents are:
+2. What is _B_? Everything which results in the firm being maximally focused on what the market rewards. There is much here. Important subcomponents are:
     * the taste and product sense to know what to produce,
-    * the charisma, moral authority, trustworthiness, credibility, and communication skills to eliminate organizational frictions and interpersonal misalignment.
+    * the charisma, moral authority, trustworthiness, credibility, and communication skills to reduce organizational frictions and interpersonal misalignment.
     * Both are facets of leadership. Both are challenging for conventional educational institutions to certify or credential.
-3. Firms will be disadvantaged if they have large process and communication overhead, and fragmented, undifferentiated culture. This disproportionately describes large firms. Previously they might have been able to succeed because small firms could not produce enough of _A_ for a viable product. Now that advantage has disappeared.
+3. Firms will be disadvantaged if they have large process and communication overhead, and fragmented, undifferentiated culture. This disproportionately affects large firms. Previously they may have been able to succeed because small firms could not produce enough of _A_ for a viable product. Now that advantage has disappeared.
 4. As the cost of _A_ drops to zero, the market becomes flooded high _A_, low _B_ products. We have a name for this: _slop_.
 5. Bottlenecks are endogenous. AI progress takes tasks in _B_ and puts then in _A_.
     * There will be large economic incentives to remove bottlenecks, one by one. Previously insignificant costs will become intolerable. If you spend 50% of your time programming (_A_) and 50% of your time on alignment and communications (_B_), halving the latter only increases output by one-third. If AI drives the time spent programming to zero, halving the time on _B_ doubles output.
