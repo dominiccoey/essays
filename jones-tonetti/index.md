@@ -12,11 +12,11 @@ How *should* we update this kind of model given the speed of AI progress over th
 
 1. **Directed innovation.** In this model innovation applies generically across all tasks: there is a single idea stock $Q_t$ at time $t$, which raises capital and labor productivities on task $i$ according to $\psi_{kit} = Q_t^{\theta_k} f(i)$, $\psi_{\ell it} = Q_t^{\theta_\ell}$ . In practice we'd expect intense economic incentives to direct innovation *specifically at improving productivity on bottleneck tasks*.
 
-2. **AI recursive self-improvement.** The ideas production feedback loop is modeled as ideas → task productivity → output → research spending → ideas, or $$Q_t \;\to\; \{\psi_{kit},\psi_{\ell it}\}_{i\in[0,1]}
-   \;\to\; Y_t
-   \;\to\; R_t
-   \;\to\; \dot Q_t$$
-in the paper's notation, where ideas and research are a undifferentiated aggregate. This can't capture the notion of recursive self-improvement for AI specifically, since there is no distinction between AI ideas and other ideas. How might we model recursive self-improvement for AI? What if we had multiple state variables corresponding to different kinds of ideas, which differentially affected outputs?
+2. **AI recursive self-improvement.** The ideas production feedback loop is modeled as ideas → task productivity → output → research spending → ideas, or $Q_t \to (\psi_{kit},\psi_{\ell it})_{i\in[0,1]}
+   \to Y_t
+   \to R_t
+   \to \dot Q_t$
+in the paper's notation, where ideas and research are an undifferentiated aggregate. This can't capture the notion of recursive self-improvement for AI specifically, since there is no distinction between AI ideas and other ideas. How might we model recursive self-improvement for AI? What if we had multiple state variables corresponding to different kinds of ideas, which differentially affected outputs?
 
 3. **What is "structural" anyway?** The authors calibrate the model on data over the last 40+ years. This helps us understand what to expect from extrapolating out from that period as a baseline. But it doesn't capture the idea that we have received important new information over the last 3 - 5 years that should cause us to fundamentally update our views, and some of the deep, structural parameters in the model may not really be invariant to AI progress.
 
