@@ -3,7 +3,7 @@ layout: page
 title: "Why economists and AI optimists talk past each other"
 permalink: /jones-tonetti/
 ---
-#### March 11, 2026
+#### March 11, 2026 
 
 AI researchers and CEOs expect AI's impact on economic growth in the coming decades, or even years, to be large. Economists meanwhile write papers suggesting that output will be 4% higher by 2040 and a growth explosion might be detectable some time after 2100.
 
