@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Why economists and AI optimists talk past each other"
+title: "Why Economists and AI optimists talk past each other"
 permalink: /jones-tonetti/
 ---
 #### March 11, 2026 
