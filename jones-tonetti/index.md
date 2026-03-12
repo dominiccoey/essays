@@ -2,7 +2,7 @@
 
 AI researchers and CEOs expect AI's impact on economic growth in the coming decades, or even years, to be large. Economists meanwhile write papers suggesting that output will be 4% higher by 2040 and a growth explosion might be detectable some time after 2100.
 
-![Screenshot 2026-03-09 at 8.09.38 PM](/Users/dominiccoey/Library/Application Support/typora-user-images/Screenshot 2026-03-09 at 8.09.38 PM.png)
+[Screenshot 2026-03-09 at 8.09.38 PM](/assets/growth.png)
 
 This divergence in views is largely because economists view "weak links" or production bottlenecks as serious constraints on growth. The paper from which the figures above were taken, "Past Automation and Future A.I.: How Weak Links Tame the Growth Explosion" is a recent exposition of this view, written by two of the leading growth economists in the world.
 
