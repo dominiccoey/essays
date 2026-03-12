@@ -11,7 +11,7 @@ AI researchers and CEOs expect AI's impact on economic growth in the coming deca
   <img src="./assets/growth.png" alt="CES" width="500">
 </p>
 
-This divergence in views is largely because economists view "weak links" or production bottlenecks as serious constraints on growth. The paper from which the figures above were taken, "Past Automation and Future A.I.: How Weak Links Tame the Growth Explosion" is a recent exposition of this view, written by two of the leading growth economists in the world.
+This divergence in views is largely because economists view "weak links" or production bottlenecks as serious constraints on growth. The paper from which the figures above were taken, "[Past Automation and Future A.I.: How Weak Links Tame the Growth Explosion](https://web.stanford.edu/~chadj/JonesTonetti_Automation.pdf)" is a recent exposition of this view, written by Chad Jones and Christopher Tonetti, two of the leading growth economists in the world.
 
 The paper is a good illustration of why these two camps seem to talk past each other. There is nothing particularly "AI" about the model, in the sense that its basic building blocks would have been familiar to a growth economist 10 years ago. As an exercise in quantifying how much past growth is due to automation, this is very reasonable, and the paper will surely become a standard reference on the topic. But it seems unlikely to make AI optimists reconsider their growth projections.
 
