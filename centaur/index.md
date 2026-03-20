@@ -3,6 +3,11 @@ layout: page
 title: "The Firm in the Centaur Age"
 permalink: /centaur/
 ---
+<style>
+ol > li {
+  margin-bottom: 1em;
+}
+</style>
 #### February 16, 2026
 
 From 2005 to around 2014, the best AI-assisted human chess players were better than the best AI and human players alone. More occupations are experiencing their own centaur age. What economic changes should we expect?
