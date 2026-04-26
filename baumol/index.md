@@ -7,7 +7,7 @@ permalink: /baumol/
 ## tl;dr 
 
 * Stagnating aggregate growth from Baumol cost disease is consistent with radical AI-driven transformation of broad sectors of the economy, and correspondingly large increases in standards of living.
-* The key question is how much productivity in various sectors will be affected by AI. Whether aggregate growth stagnates because of cost disease is mostly a distraction by comparison.
+* The key question is how much productivity in various sectors will be affected by AI. Whether aggregate growth eventually stagnates because of cost disease is mostly a distraction by comparison.
 
 ## Beware arguments from cost disease
 Baumol's cost disease might seem to support tempering expectations for AI. The argument is roughly: "Sure, we might have substantial productivity growth in some sectors. But for cost disease reasons we should expect labor to be increasingly reallocated to low productivity growth sectors, and so aggregate economic growth will be much more modest. And if aggregate growth is low, we shouldn't expect a meaningfully transformed economy."
