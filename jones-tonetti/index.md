@@ -17,7 +17,7 @@ The paper is a good illustration of why these two camps seem to talk past each o
 
 How *should* we update this kind of model given the speed of AI progress over the last couple years? Some possibilities:
 
-1. **Directed innovation.** In this model innovation applies generically across all tasks: there is a single idea stock $Q_t$ at time $t$, which raises capital and labor productivities on task $i$ according to $\psi_{kit} = Q_t^{\theta_k} f(i)$, $\psi_{\ell it} = Q_t^{\theta_\ell}$ . In practice we'd expect intense economic incentives to direct innovation *specifically at improving productivity on bottleneck tasks*.
+1. **Directed innovation.** In this model innovation applies generically across all tasks: there is a single idea stock $Q_t$ at time $t$, which raises capital and labor productivities $(\psi_{kit} , \psi_{\ell it})$ on task $i$ according to $\psi_{kit} = Q_t^{\theta_k} f(i)$ and $\psi_{\ell it} = Q_t^{\theta_\ell}$ . In practice we'd expect intense economic incentives to direct innovation *specifically at improving productivity on bottleneck tasks*.
 
 2. **AI recursive self-improvement.** The ideas production feedback loop is modeled as ideas → task productivity → output → research spending → ideas, or $Q_t \to (\psi_{kit},\psi_{\ell it})_{i\in[0,1]}
    \to Y_t
