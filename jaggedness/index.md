@@ -3,6 +3,11 @@ layout: page
 title: "On Jaggedness"
 permalink: /jaggedness/
 ---
+<style>
+ol > li {
+  margin-bottom: 1em;
+}
+</style>
 #### May 4, 2026 
 
 
