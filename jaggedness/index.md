@@ -1,4 +1,10 @@
-# On Jaggedness
+---
+layout: page
+title: "On Jaggedness"
+permalink: /jaggedness/
+---
+#### May 4, 2026 
+
 
 Jaggedness is AI's pattern of pronounced task-dependent strengths and weaknesses relative to humans. Some observations:
 
