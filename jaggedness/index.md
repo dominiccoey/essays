@@ -4,7 +4,7 @@ title: "On Jaggedness"
 permalink: /jaggedness/
 ---
 <style>
-ol > li {
+ul > li {
   margin-bottom: 1em;
 }
 </style>
