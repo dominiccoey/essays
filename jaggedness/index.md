@@ -4,8 +4,8 @@ title: "On Jaggedness"
 permalink: /jaggedness/
 ---
 <style>
-ul > li {
-  margin-bottom: 1em;
+ul > li + li {
+  margin-top: 1em;
 }
 </style>
 #### May 4, 2026 
