@@ -21,7 +21,7 @@ Jaggedness is AI's pattern of pronounced task-dependent strengths and weaknesses
   - Worst-case performance matters more if one failure can be catastrophic. This is true if AI is operating over a wide domain where one failure can cause irreversible harm.
     - Example: Chatbot safety. A single case of AI-induced psychosis can have terrible consequences.
   - In some cases outcomes depend on performance across all tasks. Minimizing accidents from self-driving benefits from both raising the ceiling (superhuman signal processing) and the floor (avoiding mistakes humans would never make).
-- **High jaggedness makes worst-case evaluation misleading.** With high jaggedness, when worst-case performance matches humans, average and best-case performance will be much beyond human-level. An emphasis on worst-case performance is justified as conservative or cautious in some settings, e.g. minimax statistical decision theory. Here it is a lagging indicator, and closer to the opposite of caution.
+- **High jaggedness makes worst-case evaluation misleading.** With high jaggedness, when worst-case performance matches humans, average and best-case performance will be much beyond human-level. An emphasis on worst-case performance is justified as conservative or cautious in some settings, e.g. minimax statistical decision theory. Here it is a lagging indicator, closer to the opposite of caution.
 - **Jaggedness and scaffolding jointly determine economic benefits.** Here’s a toy model.
   - Consider an AI skill vector across $n$ tasks $(q^{AI}_1,\ldots,q^{AI}_n)$ and a human skill vector
 $(q^{H}_1,\ldots,q^{H}_n)$.
