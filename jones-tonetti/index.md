@@ -33,7 +33,7 @@ in the paper's notation, where ideas and research are an undifferentiated aggreg
 
 6. **Within-task complementarities.** Capital and labor are perfect substitutes at the task level. This may be unfavorable to fast growth if, in practice, capital improvements also raise the productivity of labor on bottleneck tasks. What if bottleneck tasks were jointly produced by capital and labor in equilibrium? For at least some tasks, that may better reflect how people actually use AI: less as pure replacement, and more as a form of joint production.
 
-It's vastly easier to suggest extensions than to actually build models incorporating them. "It takes a model to beat a model", and all that. But it's interesting to ponder what updates of the basic growth modeling framework might be warranted, given the progress of AI capabilities, and how they might bridge the economist/AI optimist gap.
+It's vastly easier to suggest extensions than to actually build models incorporating them. "It takes a model to beat a model", and all that. But it's possible that some updates of the basic growth modeling framework might be warranted, given the progress of AI capabilities, and that might go some way to bridging the economist/AI optimist gap.
 
 
 
