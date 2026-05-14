@@ -11,7 +11,7 @@ AI researchers and CEOs expect AI's impact on economic growth in the coming deca
   <img src="./assets/growth.png" alt="CES" width="500">
 </p>
 
-This divergence in views is largely because economists view "weak links" or production bottlenecks as serious constraints on growth. The paper from which the figures above were taken, "[Past Automation and Future A.I.: How Weak Links Tame the Growth Explosion](https://web.stanford.edu/~chadj/JonesTonetti_Automation.pdf)" is a recent exposition of this view, written by Chad Jones and Christopher Tonetti, two of the leading growth economists in the world.
+This divergence in views is largely because economists view "weak links" or production bottlenecks as serious constraints on growth. The paper from which the figures above were taken, "[Past Automation and Future A.I.: How Weak Links Tame the Growth Explosion](https://web.stanford.edu/~chadj/JonesTonetti_Automation.pdf)" is a wonderful exposition of this view, written by Chad Jones and Christopher Tonetti, two of the leading growth economists in the world.
 
 The paper is a good illustration of the difference in assumptions these two camps build from. There is nothing particularly "AI" about the model, in the sense that its basic building blocks would have been familiar to a growth economist 10 years ago. As an exercise in quantifying how much past growth is due to automation, this is very reasonable, and the paper will surely become a standard reference on the topic. But it seems unlikely to make AI optimists reconsider their growth projections.
 
@@ -33,7 +33,7 @@ in the paper's notation, where ideas and research are an undifferentiated aggreg
 
 6. **Within-task complementarities.** Capital and labor are perfect substitutes at the task level. This may be unfavorable to fast growth if, in practice, capital improvements also raise the productivity of labor on bottleneck tasks. What if bottleneck tasks were jointly produced by capital and labor in equilibrium? For at least some tasks, that may better reflect how people actually use AI: less as pure replacement, and more as a form of joint production.
 
-It's vastly easier to suggest extensions than to actually build models incorporating them. "It takes a model to beat a model", and all that. But it seems *some* updates of the basic growth modeling framework might be warranted, given the progress of AI capabilities, and they may go some way towards bridging the economist/AI optimist gap.
+It's vastly easier to suggest extensions than to actually build models incorporating them. "It takes a model to beat a model", and all that. But it's interesting to ponder what updates of the basic growth modeling framework might be warranted, given the progress of AI capabilities, and how they might bridge the economist/AI optimist gap.
 
 
 
