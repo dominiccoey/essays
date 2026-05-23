@@ -5,7 +5,7 @@ permalink: /agi-health/
 ---
 #### May 22, 2026
 
-What would an economy with aligned AGI look like? This is necessarily speculative. As far as speculations go, here is one: we'll spend a large share of income buying more years of life.
+What would an economy with aligned AGI look like? This is necessarily speculative. As far as speculations go, here's one: we'll spend a large share of income buying more years of life.
 
 The basic logic is in a classic economics paper, "[The Value of Life and the Rise in Health Spending](https://web.stanford.edu/~chadj/HallJones2007.pdf)" by Hall and Jones (2007). As a society gets richer the marginal utility of consumption per year declines, but the marginal utility of more years of life does not. They write: "As we get older and richer, which is more valuable: a third car, yet another television, more clothing—or an extra year of life?" If health care spending buys enough extra years of life, we'll want to take full advantage. Under standard preferences it can be optimal to spend an increasing share of GDP on health care, and even for the share to approach 1 if longevity returns to spending remain high.
 
