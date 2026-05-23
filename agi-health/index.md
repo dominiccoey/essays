@@ -16,6 +16,15 @@ permalink: /agi-health/
   width: 500px;
 }
 
+.centered-figure {
+  text-align: center;
+  margin: 1.5rem auto;
+}
+
+.centered-figure .centered-image {
+  margin: 0 auto;
+}
+
 .centered-figure figcaption {
   margin-top: 0.5rem;
   font-size: 0.9em;
