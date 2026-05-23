@@ -60,7 +60,7 @@ If AI moves radical life extension from "too hard" to "achievable at considerabl
 
 * **Slow aging is possible in animals, including at least one mammal.**  [Naked mole-rats](https://www.science.org/content/article/naked-mole-rats-defy-biological-law-aging) and [some species of turtles and tortoises](https://www.science.org/doi/10.1126/science.abl7811) seem to experience no or minimal increase in mortality with age.
 
-*  **Slowing aging is possible in mammals.** The National Institute on Aging's [Interventions Testing Program](https://www.nia.nih.gov/research/dab/interventions-testing-program-itp/about-itp) has found several interventions that robustly increase lifespan in mice, with [rapamycin being the strongest result](https://pmc.ncbi.nlm.nih.gov/articles/PMC2786175).
+*  **Slowing aging is possible in mammals.** The National Institute on Aging's [Interventions Testing Program](https://www.nia.nih.gov/research/dab/interventions-testing-program-itp/about-itp) has found several interventions that robustly increase lifespan in mice. [Rapamycin is the strongest result](https://pmc.ncbi.nlm.nih.gov/articles/PMC2786175) so far, with ~10% increases in lifespan.
 
 *  **AI seems well-suited to making progress on "messy" biological problems**, characterized by high-dimensional complexity and no elegant unifying laws. Aging may be even [messier](https://www.cell.com/cell/fulltext/S0092-8674(22)01377-0?_returnURL%3Dhttps%3A//linkinghub.elsevier.com/retrieve/pii/S0092867422013770%3Fshowall%3Dtrue) than protein-folding, and harder to frame as a supervised learning problem. But the success of AlphaFold gives some hope that problems of this kind may prove tractable after all.
 
