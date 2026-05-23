@@ -16,6 +16,13 @@ permalink: /agi-health/
   width: 500px;
 }
 
+.centered-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9em;
+  color: #666;
+  line-height: 1.4;
+}
+  
 .post-content > ul > li + li {
   margin-top: 1em;
 }
@@ -48,6 +55,14 @@ If AI moves radical life extension from "too hard" to "achievable at considerabl
 
 *  **AI seems well-suited to making progress on "messy" biological problems**, characterized by high-dimensional complexity and no elegant unifying laws. Aging may be even [messier](https://www.cell.com/cell/fulltext/S0092-8674(22)01377-0?_returnURL%3Dhttps%3A//linkinghub.elsevier.com/retrieve/pii/S0092867422013770%3Fshowall%3Dtrue) than protein-folding, and harder to frame as a supervised learning problem. But the success of AlphaFold gives some hope that problems of this kind may prove tractable after all.
 
-<img class="centered-image small-image" src="{{ '/agi-health/assets/nakedmolerat.jpg' | relative_url }}" alt="A Naked Mole Rat">
+
+<figure class="centered-figure">
+  <img
+    class="centered-image small-image"
+    src="{{ '/agi-health/assets/nakedmolerat.jpg' | relative_url }}"
+    alt="A naked mole-rat"
+  >
+  <figcaption>A naked mole-rat.</figcaption>
+</figure>
 
 This will probably not be cheap. We are far from knowing how to make humans age like naked mole-rats, and there will be vast biological, experimental, and regulatory challenges along the way. So longevity is the right shape of problem to attract an increasing share of spending. Life extension is highly valued, and AI may make it just about tractable with great investment. If AI can bend our mortality curves to look a bit more like those of other mammals but only at considerable expense, we might well end up in the world Hall and Jones describe: longer and healthier lives, at the cost of a large and growing fraction of GDP.
