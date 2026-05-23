@@ -15,6 +15,9 @@ permalink: /agi-health/
 .centered-image.small-image {
   width: 500px;
 }
+
+<style> .post-content > ul > li + li { margin-top: 1em; }</style>
+
 </style>
 
 #### May 22, 2026
