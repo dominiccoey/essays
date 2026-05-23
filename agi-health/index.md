@@ -25,7 +25,7 @@ The basic logic is in a classic economics paper, "[The Value of Life and the Ris
 
 <img
   class="centered-image"
-  src="{{ '/assets/health-expenditures-1970-2024.png' | relative_url }}"
+  src="/assets/health-expenditures-1970-2024.png"
   alt="Health Expenditures"
 >
 
@@ -45,7 +45,7 @@ If AI moves radical life extension from "too hard" to "achievable at considerabl
 
 <img
   class="centered-image small-image"
-  src="{{ '/assets/nakedmolerat.jpg' | relative_url }}"
+  src="/assets/nakedmolerat.jpg"
   alt="A Naked Mole Rat"
 >
 
