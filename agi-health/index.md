@@ -44,7 +44,9 @@ permalink: /agi-health/
 
 #### May 22, 2026
 
-What would an economy with aligned AGI look like? This is necessarily speculative. As far as speculations go, here's one: we'll spend a large share of income buying more years of life.
+What would an economy with aligned AGI look like? This is necessarily speculative. As far as speculations go, here's one: we'll spend a large share of income buying more years of life.[^1]
+
+[^1]: Some excellent essays on this general topic are [here](https://philiptrammell.substack.com/p/is-labor-a-luxury-in-the-long-run) from Philip Trammell and [here](https://aleximas.substack.com/p/what-will-be-scarce) from Alex Imas.
 
 The basic logic is in a classic economics paper, "[The Value of Life and the Rise in Health Spending](https://web.stanford.edu/~chadj/HallJones2007.pdf)" by Hall and Jones (2007). As a society gets richer the marginal utility of consumption per year declines, but the marginal utility of more years of life does not. They write: "As we get older and richer, which is more valuable: a third car, yet another television, more clothing—or an extra year of life?" If health care spending buys enough extra years of life, we'll want to take full advantage. Under standard preferences it can be optimal to spend an increasing share of GDP on health care, and even for the share to approach 1 if longevity returns to spending remain high.
 
@@ -75,3 +77,4 @@ If AI moves radical life extension from "too hard" to "achievable at considerabl
 </figure>
 
 This will probably not be cheap. We are far from knowing how to make humans age like naked mole-rats, and there will be vast biological, experimental, and regulatory challenges along the way. So longevity is the right shape of problem to attract an increasing share of spending. Life extension is highly valued, and AI may make it just about tractable with great investment. If AI can bend our mortality curves to look a bit more like those of other mammals but only at considerable expense, we might end up living longer and healthier lives, at the cost of a large and growing fraction of GDP.
+
