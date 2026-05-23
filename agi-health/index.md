@@ -1,4 +1,9 @@
-# AGI and Health Care Spending
+---
+layout: page
+title: "AGI and Health Care Spending"
+permalink: /agi-health/
+---
+#### May 22, 2026
 
 What would an economy with aligned AGI look like? This is necessarily speculative. As far as speculations go, here is one: we'll spend a large share of income buying more years of life.
 
