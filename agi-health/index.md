@@ -9,7 +9,7 @@ What would an economy with aligned AGI look like? This is necessarily speculativ
 
 The basic logic is in a classic economics paper, "[The Value of Life and the Rise in Health Spending](https://web.stanford.edu/~chadj/HallJones2007.pdf)" by Hall and Jones (2007). As a society gets richer the marginal utility of consumption per year declines, but the marginal utility of more years of life does not. They write: "As we get older and richer, which is more valuable: a third car, yet another television, more clothing—or an extra year of life?" If health care spending buys enough extra years of life, we'll want to take full advantage. Under standard preferences it can be optimal to spend an increasing share of GDP on health care, and even for the share to approach 1 if longevity returns to spending remain high.
 
-<img src="./assets/health-expenditures-1970-2024.png" alt="Health Expenditures" width="500px">
+<img src="./assets/health-expenditures-1970-2024.png" alt="Health Expenditures" width="700px">
 
 Hall and Jones suggest that the optimal health care share of US GDP could exceed 30% by mid-century. Health care spending is growing much slower than that would imply, having increased only modestly from ~16% in 2007 to ~18% now. But AI may yet vindicate this prediction. To justify substantial expenditure, a problem must have two properties. First, the solution must be highly valued. Second, the problem must be neither too easy nor too hard. Too easy, and we solve the problem at low cost; too hard, and the returns are too low to justify the spending. In Hall and Jones's model, the elasticity of lifespan with respect to health spending needs to be high enough: if spending more doesn't buy more years, it's not worth it.
 
