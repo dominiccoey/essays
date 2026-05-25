@@ -67,6 +67,6 @@ There's some irony that Baumol's canonical illustration of cost disease involved
 
 Granted if there is "authenticity" demand which can only be satisfied by actual humans, then technology can't generate perfect substitutes by definition. How widespread such demand will be will shape our future economy.
 
-## Fixating on cost disease obscures more than it illuminates
+## Fixating on cost disease risks obscuring more than it illuminates
 There is more that could be said here—e.g. cost disease in intermediate vs final goods, the role of bottlenecks in the production functions, distributional consequences, capital substituting for labor in production, frictions in reallocation of labor across sectors. And a declining aggregate growth rate may have implications for fiscal space. But the arguments above should suffice to show that stagnationist arguments from cost disease don't rule out transformative changes. We should instead focus attention on the more important issues—what sectors will be affected by AI, how important they are to peoples' lives, and how much we expect them to change.
 
