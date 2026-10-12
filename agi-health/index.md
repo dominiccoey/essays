@@ -76,5 +76,5 @@ If AI moves radical life extension from "too hard" to "achievable at considerabl
   <figcaption>A naked mole-rat.</figcaption>
 </figure>
 
-This will probably not be cheap. We are far from knowing how to make humans age like naked mole-rats, and there will be vast biological, experimental, and regulatory challenges along the way. So longevity is the right shape of problem to attract an increasing share of spending. Life extension is highly valued, and AI may make it just about tractable with great investment. If AI can bend our mortality curves to look a bit more like those of other mammals but only at considerable expense, we might end up living longer and healthier lives, at the cost of a large and growing fraction of GDP.
+This will not be cheap. We are far from knowing how to make humans age like naked mole-rats, and there will be vast biological, experimental, and regulatory challenges along the way. So longevity is the right shape of problem to attract an increasing share of spending. Life extension is highly valued, and AI may make it just about tractable with great investment. If AI can bend our mortality curves to look a bit more like those of other mammals but only at considerable expense, we might end up living longer and healthier lives, at the cost of a large and growing fraction of GDP.
 
